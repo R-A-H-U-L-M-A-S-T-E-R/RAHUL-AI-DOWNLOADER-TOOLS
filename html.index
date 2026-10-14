@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASTER DOWNLOADER | AB MASTER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e1b4b, #311042);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            background: linear-gradient(to right, #38bdf8, #c084fc, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        /* Platform Tabs */
+        .tabs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 5px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #cbd5e1;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            border-color: transparent;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Input Form */
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 14px 18px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #a855f7;
+        }
+
+        .input-group button {
+            padding: 0 22px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .input-group button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* Result Section */
+        .result-box {
+            display: none;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 15px;
+            align-items: center;
+            gap: 15px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .result-box img {
+            width: 100px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .video-info {
+            flex: 1;
+        }
+
+        .video-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            color: #f1f5f9;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            border: none;
+        }
+
+        .btn-download {
+            background: #10b981;
+            color: #fff;
+        }
+
+        .btn-open {
+            background: #3b82f6;
+            color: #fff;
+        }
+
+        /* Owner WhatsApp Button Footer */
+        .owner-footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #25d366;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Loading Spinner */
+        .loader {
+            display: none;
+            text-align: center;
+            margin: 15px 0;
+        }
+        .spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: #a855f7;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>🚀 RAHUL-MASTER DOWNLOADER</h1>
+            <p>Download & Search Media Instantly</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active" onclick="switchPlatform('instagram')"><i class="fa-brands fa-instagram"></i> Insta DL</div>
+            <div class="tab" onclick="switchPlatform('facebook')"><i class="fa-brands fa-facebook"></i> FB DL</div>
+            <div class="tab" onclick="switchPlatform('video')"><i class="fa-solid fa-video"></i> Video Search</div>
+            <div class="tab" onclick="switchPlatform('play')"><i class="fa-solid fa-music"></i> Play DL</div>
+        </div>
+
+        <!-- Input Form -->
+        <div class="input-group">
+            <input type="text" id="videoUrl" placeholder="Paste Instagram link here...">
+            <button onclick="fetchMedia()"><i class="fa-solid fa-arrow-down"></i></button>
+        </div>
+
+        <!-- Loader -->
+        <div class="loader" id="loader">
+            <div class="spinner"></div>
+            <p style="font-size: 11px; margin-top: 5px; color: #a855f7;" id="loaderText">Fetching media from API...</p>
+        </div>
+
+        <!-- Result Card -->
+        <div class="result-box" id="resultBox">
+            <img id="thumbnail" src="" alt="Thumbnail">
+            <div class="video-info">
+                <h4 id="videoTitle">Media Ready</h4>
+                <div class="action-btns">
+                    <!-- Direct Download Button -->
+                    <a id="downloadBtn" href="#" class="btn btn-download" download target="_blank"><i class="fa-solid fa-download"></i> Download</a>
+                    <!-- Open in New Tab Button -->
+                    <a id="openBtn" href="#" class="btn btn-open" target="_blank"><i class="fa-solid fa-external-link-alt"></i> Open</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Owner WhatsApp Button Footer -->
+        <div class="owner-footer">
+            <a href="https://wa.me/919356730236?text=Hello%20RAHUL%20MASTER,%20I%20want%20to%20talk%20about%20your%20Master%20Downloader!" class="whatsapp-btn" target="_blank">
+                <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> Contact Owner on WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <script>
+        let currentPlatform = 'instagram';
+
+        function switchPlatform(platform) {
+            currentPlatform = platform;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            
+            const input = document.getElementById('videoUrl');
+            if (platform === 'instagram') {
+                input.placeholder = "Paste Instagram link here...";
+            } else if (platform === 'facebook') {
+                input.placeholder = "Paste Facebook link here...";
+            } else if (platform === 'video') {
+                input.placeholder = "Search video (e.g., Despacito official)...";
+            } else if (platform === 'play') {
+                input.placeholder = "Search song (e.g., Shape of You)...";
+            }
+            document.getElementById('resultBox').style.display = 'none';
+        }
+
+        async function fetchMedia() {
+            const queryVal = document.getElementById('videoUrl').value.trim();
+            if(!queryVal) {
+                alert("Please enter a valid URL or search query!");
+                return;
+            }
+
+            document.getElementById('loader').style.display = 'block';
+            document.getElementById('resultBox').style.display = 'none';
+
+            try {
+                let apiUrl = '';
+                if (currentPlatform === 'instagram') {
+                    apiUrl = `https://api.sayan-nexuswork.workers.dev/insta?url=${encodeURIComponent(queryVal)}`;
+                } else if (currentPlatform === 'facebook') {
+                    apiUrl = `https://api.sayan-nexuswork.workers.dev/facebook?url=${encodeURIComponent(queryVal)}`;
+                } else if (currentPlatform === 'video') {
+                    apiUrl = `https://api.sayan-nexuswork.workers.dev/video?query=${encodeURIComponent(queryVal)}`;
+                } else if (currentPlatform === 'play') {
+                    apiUrl = `https://api.sayan-nexuswork.workers.dev/play?query=${encodeURIComponent(queryVal)}`;
+                }
+
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                
+                document.getElementById('loader').style.display = 'none';
+
+                if (data) {
+                    const mediaLink = data.url || data.download_url || data.video_url || data.result || data.link;
+                    const thumb = data.thumbnail || data.cover || data.image || "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200";
+                    const title = data.title || data.name || "Song Download Ready";
+
+                    if (mediaLink) {
+                        document.getElementById('thumbnail').src = thumb;
+                        document.getElementById('videoTitle').innerText = title;
+                        
+                        document.getElementById('downloadBtn').href = mediaLink;
+                        document.getElementById('openBtn').href = mediaLink;
+
+                        document.getElementById('resultBox').style.display = 'flex';
+                    } else {
+                        alert("Could not retrieve media link from API response.");
+                    }
+                } else {
+                    alert("No data received from the API.");
+                }
+            } catch (error) {
+                document.getElementById('loader').style.display = 'none';
+                alert("API Request Error: " + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

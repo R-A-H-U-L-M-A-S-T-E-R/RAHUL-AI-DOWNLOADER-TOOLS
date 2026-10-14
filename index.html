@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAHUL-AI MATRIX DOWNLOADER | RAHUL MASTER</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>RAHUL-AI RGB AUTO-LIGHTING DOWNLOADER | RAHUL MASTER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -15,7 +15,7 @@
         }
 
         body {
-            color: #00ffcc;
+            color: #ffffff;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -24,35 +24,50 @@
             padding: 15px;
             overflow-x: hidden;
             position: relative;
-            background: #000000;
+            background: #020204;
         }
 
-        /* Matrix Background Effect */
-        .matrix-bg {
+        /* Subtle Dark Grid Background */
+        .bg-grid {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -2;
-            background-image: radial-gradient(circle at 50% 50%, #051a14 0%, #000000 80%);
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
         }
 
-        /* Status Bar with Sleek Border Glow */
+        /* Dynamic Auto-Changing Status Bar Border */
         .status-bar {
             width: 100%;
             max-width: 480px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #050b09;
-            border: 1px solid rgba(0, 255, 204, 0.4);
+            background: #090a10;
             border-radius: 14px;
             padding: 10px 18px;
             margin-bottom: 15px;
             font-size: 12px;
             color: #e2e8f0;
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.15);
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+
+        .status-bar::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px; right: -1px; bottom: -1px;
+            background: linear-gradient(90deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bbf, #7a00ff, #ff00c8, #ff0000);
+            background-size: 400%;
+            z-index: -1;
+            border-radius: 15px;
+            animation: autoLightingFlow 8s linear infinite;
         }
 
         .status-item {
@@ -61,34 +76,34 @@
             gap: 6px;
         }
 
-        /* Main Container: Pure Solid Black Box with Neon Border Light */
+        /* Main Container: Pure Solid Black Box with Smooth RGB Auto-Lighting Border */
         .container {
             max-width: 480px;
             width: 100%;
-            background: #030504; /* Absolute Solid Black Interior */
-            border-radius: 26px;
+            background: #08090f; /* Pure Solid Dark Interior */
+            border-radius: 24px;
             padding: 28px;
             position: relative;
             z-index: 1;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.95);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95);
         }
 
-        /* Pure Border Neon Flow Animation */
+        /* Continuous Auto Rainbow Lighting Border Animation */
         .container::before {
             content: '';
             position: absolute;
             top: -2px; left: -2px; right: -2px; bottom: -2px;
-            background: linear-gradient(60deg, #00ffcc, #0066ff, #ff007f, #00ffcc);
-            background-size: 300%;
+            background: linear-gradient(45deg, #ff0055, #7a00ff, #00e5ff, #00ff66, #ffcc00, #ff0055);
+            background-size: 400%;
             z-index: -1;
-            border-radius: 28px;
-            animation: matrixBorderAnim 4s linear infinite;
+            border-radius: 26px;
+            animation: autoLightingFlow 6s linear infinite;
         }
 
-        @keyframes matrixBorderAnim {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        @keyframes autoLightingFlow {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
         }
 
         .header {
@@ -97,21 +112,18 @@
         }
 
         .header h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 19px;
-            font-weight: 900;
-            background: linear-gradient(to right, #00ffcc, #00b3ff, #ff007f);
+            font-size: 21px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #00e5ff, #7a00ff, #ff0055);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 6px;
-            letter-spacing: 1px;
-            filter: drop-shadow(0 0 8px rgba(0, 255, 204, 0.4));
+            letter-spacing: -0.5px;
         }
 
         .header p {
-            font-size: 11px;
-            color: #8a99ad;
-            letter-spacing: 0.5px;
+            font-size: 12px;
+            color: #94a3b8;
         }
 
         /* Platform Icons */
@@ -119,35 +131,34 @@
             display: flex;
             justify-content: center;
             gap: 16px;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             font-size: 18px;
-            color: #00ffcc;
+            color: #00e5ff;
         }
 
         .platforms-hint i {
             transition: 0.3s;
         }
         .platforms-hint i:hover {
-            color: #ff007f;
-            transform: scale(1.25) translateY(-2px);
-            filter: drop-shadow(0 0 10px #ff007f);
+            color: #ff0055;
+            transform: scale(1.3);
         }
 
-        /* Input Group Style */
+        /* Input Group */
         .input-group {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
-            background: #010302;
-            border: 1px solid rgba(0, 255, 204, 0.35);
+            background: #020306;
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 14px;
             padding: 6px;
             transition: 0.3s;
         }
 
         .input-group:focus-within {
-            border-color: #00ffcc;
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+            border-color: #00e5ff;
+            box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
         }
 
         .input-group input {
@@ -161,37 +172,36 @@
         }
 
         .input-group input::placeholder {
-            color: #556677;
+            color: #64748b;
         }
 
         .input-group button {
             padding: 0 20px;
-            background: linear-gradient(135deg, #00ffcc, #0066ff);
+            background: linear-gradient(135deg, #00e5ff, #7a00ff);
             border: none;
             border-radius: 10px;
-            color: #000;
+            color: #fff;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 0 12px rgba(0, 255, 204, 0.4);
+            box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
         }
 
         .input-group button:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.7);
         }
 
         /* Result Box */
         .result-box {
             display: none;
-            background: #050d0a;
-            border: 1px solid #00ffcc;
+            background: #0d0f1a;
+            border: 1px solid #00ff66;
             border-radius: 14px;
             padding: 12px;
             align-items: center;
             gap: 12px;
             margin-bottom: 15px;
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
         }
 
         .result-box img {
@@ -199,7 +209,7 @@
             height: 60px;
             object-fit: cover;
             border-radius: 8px;
-            border: 1px solid #00ffcc;
+            border: 1px solid #00ff66;
         }
 
         .video-info {
@@ -237,23 +247,23 @@
         }
 
         .btn-download {
-            background: #00ffcc;
+            background: #00ff66;
             color: #000;
         }
 
         .btn-download:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.7);
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.6);
         }
 
         .btn-open {
-            background: #0066ff;
-            color: #fff;
+            background: #00e5ff;
+            color: #000;
         }
 
         .btn-open:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(0, 102, 255, 0.7);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.6);
         }
 
         /* Loader */
@@ -267,7 +277,7 @@
             width: 26px;
             height: 26px;
             border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top-color: #00ffcc;
+            border-top-color: #00e5ff;
             border-radius: 50%;
             animation: spin 0.6s linear infinite;
             margin: 0 auto;
@@ -300,26 +310,25 @@
 
         .whatsapp-btn:hover {
             transform: scale(1.04);
-            box-shadow: 0 0 25px rgba(37, 211, 102, 0.7);
         }
     </style>
 </head>
 <body>
 
-    <div class="matrix-bg"></div>
+    <div class="bg-grid"></div>
 
     <!-- Status Bar -->
     <div class="status-bar">
-        <div class="status-item" id="liveTime"><i class="fa-regular fa-clock" style="color: #00ffcc;"></i> --:-- --</div>
-        <div class="status-item" id="liveDate"><i class="fa-regular fa-calendar-days" style="color: #0066ff;"></i> --/--/----</div>
-        <div class="status-item" id="batteryStatus"><i class="fa-solid fa-battery-half" style="color: #25d366;"></i> --%</div>
+        <div class="status-item" id="liveTime"><i class="fa-regular fa-clock" style="color: #00e5ff;"></i> --:-- --</div>
+        <div class="status-item" id="liveDate"><i class="fa-regular fa-calendar-days" style="color: #ff0055;"></i> --/--/----</div>
+        <div class="status-item" id="batteryStatus"><i class="fa-solid fa-battery-half" style="color: #00ff66;"></i> --%</div>
     </div>
 
-    <!-- Main Black Container with Neon Border -->
+    <!-- Main Container -->
     <div class="container">
         <div class="header">
-            <h1>RAHUL-AI MATRIX DOWNLOADER</h1>
-            <p>Paste any link & download instantly</p>
+            <h1>RAHUL-AI AUTO-LIGHTING DOWNLOADER</h1>
+            <p>Paste any link & video extracts automatically</p>
         </div>
 
         <div class="platforms-hint">
@@ -331,13 +340,13 @@
         </div>
 
         <div class="input-group">
-            <input type="text" id="videoUrl" placeholder="Paste any link here (Insta, FB, YT)...">
+            <input type="text" id="videoUrl" placeholder="Paste any video link here...">
             <button onclick="autoFetchMedia()"><i class="fa-solid fa-bolt"></i></button>
         </div>
 
         <div class="loader" id="loader">
             <div class="spinner"></div>
-            <p style="font-size: 11px; margin-top: 6px; color: #00ffcc;">Fetching media automatically...</p>
+            <p style="font-size: 11px; margin-top: 6px; color: #00e5ff;">Extracting video link...</p>
         </div>
 
         <div class="result-box" id="resultBox">
@@ -352,7 +361,7 @@
         </div>
 
         <div class="owner-footer">
-            <a href="https://wa.me/919356730236?text=Hello%20RAHUL%20MASTER,%20I%20want%20to%20talk%20about%20your%20Matrix%20Downloader!" class="whatsapp-btn" target="_blank">
+            <a href="https://wa.me/919356730236?text=Hello%20RAHUL%20MASTER,%20I%20want%20to%20talk%20about%20your%20Auto-Lighting%20Downloader!" class="whatsapp-btn" target="_blank">
                 <i class="fa-brands fa-whatsapp" style="font-size: 15px;"></i> Contact Owner on WhatsApp
             </a>
         </div>
@@ -367,11 +376,11 @@
             let ampm = hours >= 12 ? 'PM' : 'AM';
             hours = hours % 12 || 12;
 
-            document.getElementById('liveTime').innerHTML = `<i class="fa-regular fa-clock" style="color: #00ffcc;"></i> ${hours}:${minutes} ${ampm}`;
+            document.getElementById('liveTime').innerHTML = `<i class="fa-regular fa-clock" style="color: #00e5ff;"></i> ${hours}:${minutes} ${ampm}`;
             
             const options = { day: 'numeric', month: 'short' };
             const dateStr = now.toLocaleDateString('en-US', options);
-            document.getElementById('liveDate').innerHTML = `<i class="fa-regular fa-calendar-days" style="color: #0066ff;"></i> ${dateStr}`;
+            document.getElementById('liveDate').innerHTML = `<i class="fa-regular fa-calendar-days" style="color: #ff0055;"></i> ${dateStr}`;
         }
         setInterval(updateClock, 1000);
         updateClock();
@@ -385,13 +394,13 @@
                         const level = Math.floor(battery.level * 100);
                         const isCharging = battery.charging;
                         let iconClass = "fa-battery-full";
-                        let iconColor = "#25d366";
+                        let iconColor = "#00ff66";
 
-                        if (level <= 20) { iconClass = "fa-battery-empty"; iconColor = "#ff007f"; }
-                        else if (level <= 50) { iconClass = "fa-battery-half"; iconColor = "#0066ff"; }
+                        if (level <= 20) { iconClass = "fa-battery-empty"; iconColor = "#ff0055"; }
+                        else if (level <= 50) { iconClass = "fa-battery-half"; iconColor = "#ffcc00"; }
 
                         if (isCharging) {
-                            document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid fa-bolt" style="color: #00ffcc;"></i> ${level}%`;
+                            document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid fa-bolt" style="color: #00e5ff;"></i> ${level}%`;
                         } else {
                             document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid ${iconClass}" style="color: ${iconColor};"></i> ${level}%`;
                         }
@@ -400,19 +409,19 @@
                     battery.addEventListener('levelchange', updateBatteryInfo);
                     battery.addEventListener('chargingchange', updateBatteryInfo);
                 } catch (e) {
-                    document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid fa-battery-bolt" style="color: #00ffcc;"></i> 100%`;
+                    document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid fa-battery-bolt" style="color: #00e5ff;"></i> 100%`;
                 }
             } else {
-                document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid fa-battery-bolt" style="color: #00ffcc;"></i> 100%`;
+                document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid fa-battery-bolt" style="color: #00e5ff;"></i> 100%`;
             }
         }
         initBattery();
 
-        // Universal Auto-Detection Downloader Engine
+        // Auto Link Downloader Function
         async function autoFetchMedia() {
             const queryVal = document.getElementById('videoUrl').value.trim();
             if(!queryVal) {
-                alert("Krupaya valid link paste kara!");
+                alert("Krupaya kontihi link paste kara!");
                 return;
             }
 
@@ -437,7 +446,7 @@
                 if (data) {
                     const mediaLink = data.url || data.download_url || data.video_url || data.result || data.link;
                     const thumb = data.thumbnail || data.cover || data.image || "https://images.unsplash.com/photo-1611671755657-f3942ec15b13?w=300";
-                    const title = data.title || data.name || "Media File Download Ready";
+                    const title = data.title || data.name || "Media File Ready";
 
                     if (mediaLink) {
                         document.getElementById('thumbnail').src = thumb;
@@ -448,14 +457,14 @@
 
                         document.getElementById('resultBox').style.display = 'flex';
                     } else {
-                        alert("Download link milali nahi. Krupaya link check kara.");
+                        alert("Video extract nahi zala. Krupaya link check kara.");
                     }
                 } else {
-                    alert("Server kadun response ala nahi.");
+                    alert("Server error.");
                 }
             } catch (error) {
                 document.getElementById('loader').style.display = 'none';
-                alert("Connection Error: " + error.message);
+                alert("Error: " + error.message);
             }
         }
     </script>

@@ -351,7 +351,7 @@
 </head>
 <body>
 
-    <!-- Attached Custom Audio File -->
+    <!-- Audio Tag with your attached file[span_2](start_span)[span_2](end_span) -->
     <audio id="bgAudio" loop preload="auto">
         <source src="AUD-20261010-WA0026.mp3" type="audio/mp3">
     </audio>
@@ -443,25 +443,28 @@
                     audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
                     audioBtn.classList.add('active');
                     isPlaying = true;
-                }).catch(err => console.log("Audio play error:", err));
+                }).catch(err => {
+                    console.log("Audio play blocked:", err);
+                    alert("Audio play failed. Check if audio file 'AUD-20261010-WA0026.mp3' is uploaded in the root folder[span_3](start_span)[span_3](end_span).");
+                });
             }
         }
 
-        // Screen var kuthepan click/touch kelyavar audio play hoil (Browser Autoplay Policy Fix)
-        function enableAudioOnInteraction() {
+        // Automatic audio unlock on first user click/touch
+        function unlockAudio() {
             if (!isPlaying) {
                 audio.play().then(() => {
                     audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
                     audioBtn.classList.add('active');
                     isPlaying = true;
-                    window.removeEventListener('click', enableAudioOnInteraction);
-                    window.removeEventListener('touchstart', enableAudioOnInteraction);
+                    window.removeEventListener('click', unlockAudio);
+                    window.removeEventListener('touchstart', unlockAudio);
                 }).catch(e => console.log(e));
             }
         }
 
-        window.addEventListener('click', enableAudioOnInteraction);
-        window.addEventListener('touchstart', enableAudioOnInteraction);
+        window.addEventListener('click', unlockAudio);
+        window.addEventListener('touchstart', unlockAudio);
 
         let currentPlatform = 'instagram';
 

@@ -92,24 +92,24 @@
         }
 
         .audio-btn {
-            background: rgba(0, 240, 255, 0.15);
+            background: #00f0ff;
             border: 1px solid rgba(0, 240, 255, 0.4);
-            color: #00f0ff;
-            padding: 4px 10px;
+            color: #000;
+            padding: 4px 12px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 5px;
+            box-shadow: 0 0 10px #00f0ff;
             transition: all 0.3s;
         }
 
         .audio-btn:hover {
-            background: #00f0ff;
-            color: #000;
-            box-shadow: 0 0 10px #00f0ff;
+            opacity: 0.9;
+            transform: scale(1.05);
         }
 
         /* Container with Neon Glowing Border */
@@ -361,7 +361,7 @@
 <body>
 
     <!-- Background Audio Element -->
-    <audio id="bgAudio" loop preload="auto">
+    <audio id="bgAudio" loop autoplay preload="auto">
         <source src="https://tmpfiles.org/dl/wFAyKHPx7TG8/file_1791971001575.ogg" type="audio/ogg">
     </audio>
 
@@ -376,7 +376,7 @@
             <span id="liveDate"><i class="fa-regular fa-calendar-days" style="color: #ff007f;"></i> --/--/----</span>
         </div>
         <button class="audio-btn" id="audioToggleBtn" onclick="toggleAudio()">
-            <i class="fa-solid fa-music"></i> Music Off
+            <i class="fa-solid fa-volume-high"></i> Music On
         </button>
     </div>
 
@@ -445,33 +445,40 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // --- 2. Background Audio Auto-Play & Control ---
+        // --- 2. Background Audio Control & Auto-Play ---
         const audio = document.getElementById('bgAudio');
         const audioBtn = document.getElementById('audioToggleBtn');
-        let isPlaying = false;
+        let isPlaying = true;
 
         function toggleAudio() {
             if (isPlaying) {
                 audio.pause();
                 audioBtn.innerHTML = `<i class="fa-solid fa-music"></i> Music Off`;
+                audioBtn.style.background = "rgba(0, 240, 255, 0.15)";
+                audioBtn.style.color = "#00f0ff";
+                audioBtn.style.boxShadow = "none";
                 isPlaying = false;
             } else {
                 audio.play().then(() => {
                     audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
+                    audioBtn.style.background = "#00f0ff";
+                    audioBtn.style.color = "#000";
+                    audioBtn.style.boxShadow = "0 0 10px #00f0ff";
                     isPlaying = true;
                 }).catch(err => console.log(err));
             }
         }
 
-        // Page load hotach audio play karnyacha prayatna, jar browser block karat asel tr first click/touch var play hoil
         window.addEventListener('DOMContentLoaded', () => {
             audio.play().then(() => {
-                audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
                 isPlaying = true;
             }).catch(() => {
                 const startAudio = () => {
                     audio.play().then(() => {
                         audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
+                        audioBtn.style.background = "#00f0ff";
+                        audioBtn.style.color = "#000";
+                        audioBtn.style.boxShadow = "0 0 10px #00f0ff";
                         isPlaying = true;
                         window.removeEventListener('click', startAudio);
                         window.removeEventListener('touchstart', startAudio);

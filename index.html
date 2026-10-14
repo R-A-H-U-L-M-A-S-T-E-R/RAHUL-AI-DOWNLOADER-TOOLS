@@ -445,7 +445,7 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // --- 2. Background Audio Control ---
+        // --- 2. Background Audio Auto-Play & Control ---
         const audio = document.getElementById('bgAudio');
         const audioBtn = document.getElementById('audioToggleBtn');
         let isPlaying = false;
@@ -459,20 +459,28 @@
                 audio.play().then(() => {
                     audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
                     isPlaying = true;
-                }).catch(err => alert("Please interact with the page first!"));
+                }).catch(err => console.log(err));
             }
         }
 
-        // Auto play audio on first user click anywhere
-        document.body.addEventListener('click', function autoPlayAudio() {
-            if (!isPlaying) {
-                audio.play().then(() => {
-                    audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
-                    isPlaying = true;
-                }).catch(() => {});
-            }
-            document.body.removeEventListener('click', autoPlayAudio);
-        }, { once: true });
+        // Page load hotach audio play karnyacha prayatna, jar browser block karat asel tr first click/touch var play hoil
+        window.addEventListener('DOMContentLoaded', () => {
+            audio.play().then(() => {
+                audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
+                isPlaying = true;
+            }).catch(() => {
+                const startAudio = () => {
+                    audio.play().then(() => {
+                        audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
+                        isPlaying = true;
+                        window.removeEventListener('click', startAudio);
+                        window.removeEventListener('touchstart', startAudio);
+                    });
+                };
+                window.addEventListener('click', startAudio);
+                window.addEventListener('touchstart', startAudio);
+            });
+        });
 
         // --- 3. Downloader Platform Functions ---
         let currentPlatform = 'instagram';

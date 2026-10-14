@@ -15,7 +15,6 @@
         }
 
         body {
-            background: #030712;
             color: #f8fafc;
             min-height: 100vh;
             display: flex;
@@ -25,108 +24,84 @@
             padding: 15px;
             overflow-x: hidden;
             position: relative;
+            background: #030712;
         }
 
-        body::before {
-            content: '';
+        /* Live Animated Video Background */
+        .bg-video {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(125deg, #090a1f, #1e0b36, #031b29, #140326);
-            background-size: 400% 400%;
-            animation: moveGradient 12s ease infinite;
+            object-fit: cover;
             z-index: -2;
+            filter: brightness(0.35) contrast(1.25);
         }
 
-        @keyframes moveGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .lighting-orb {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            filter: blur(100px);
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.25), transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(255, 0, 127, 0.25), transparent 50%);
             z-index: -1;
-            opacity: 0.6;
-            animation: pulseGlow 6s infinite alternate ease-in-out;
+            animation: pulseOverlay 8s infinite alternate ease-in-out;
         }
 
-        .orb-1 { top: 10%; left: 5%; background: #00f0ff; }
-        .orb-2 { bottom: 10%; right: 5%; background: #ff007f; animation-delay: -3s; }
-
-        @keyframes pulseGlow {
-            0% { transform: scale(0.9) translateY(0); opacity: 0.5; }
-            100% { transform: scale(1.2) translateY(30px); opacity: 0.8; }
+        @keyframes pulseOverlay {
+            0% { transform: scale(1); filter: hue-rotate(0deg); }
+            100% { transform: scale(1.1); filter: hue-rotate(360deg); }
         }
 
         .status-bar {
             width: 100%;
             max-width: 520px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(15, 23, 42, 0.65);
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(0, 240, 255, 0.2);
+            border: 1px solid rgba(0, 240, 255, 0.3);
             border-radius: 14px;
             padding: 8px 16px;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             font-size: 12px;
             color: #e2e8f0;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+            gap: 15px;
         }
 
-        .status-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .audio-btn {
-            background: rgba(0, 240, 255, 0.15);
-            border: 1px solid rgba(0, 240, 255, 0.4);
-            color: #00f0ff;
-            padding: 5px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: all 0.3s;
-        }
-
-        .audio-btn.active {
-            background: #00f0ff;
-            color: #000;
-            box-shadow: 0 0 15px #00f0ff;
-        }
-
+        /* Main Container with Moving Light Border */
         .container {
             max-width: 520px;
             width: 100%;
-            background: rgba(13, 17, 38, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(10, 14, 30, 0.8);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border-radius: 24px;
             padding: 25px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
             position: relative;
             border: 2px solid transparent;
-            animation: neonBorder 8s linear infinite;
+            animation: cyberBorder 6s linear infinite;
         }
 
-        @keyframes neonBorder {
-            0% { border-color: #00f0ff; box-shadow: 0 0 20px rgba(0, 240, 255, 0.4); }
-            50% { border-color: #ff007f; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); }
-            100% { border-color: #00f0ff; box-shadow: 0 0 20px rgba(0, 240, 255, 0.4); }
+        @keyframes cyberBorder {
+            0% { 
+                border-color: #00f0ff; 
+                box-shadow: 0 0 25px rgba(0, 240, 255, 0.5), inset 0 0 15px rgba(0, 240, 255, 0.2); 
+            }
+            50% { 
+                border-color: #ff007f; 
+                box-shadow: 0 0 25px rgba(255, 0, 127, 0.5), inset 0 0 15px rgba(255, 0, 127, 0.2); 
+            }
+            100% { 
+                border-color: #00f0ff; 
+                box-shadow: 0 0 25px rgba(0, 240, 255, 0.5), inset 0 0 15px rgba(0, 240, 255, 0.2); 
+            }
         }
 
         .header {
@@ -135,30 +110,32 @@
         }
 
         .header h1 {
-            font-size: 23px;
+            font-size: 24px;
             font-weight: 700;
             background: linear-gradient(to right, #00f0ff, #b000ff, #ff007f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 4px;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
         }
 
         .header p {
             font-size: 12px;
             color: #94a3b8;
+            letter-spacing: 0.5px;
         }
 
         .tabs {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 20px;
         }
 
         .tab {
-            padding: 10px;
+            padding: 11px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             cursor: pointer;
@@ -171,13 +148,14 @@
         .tab:hover {
             border-color: #00f0ff;
             color: #00f0ff;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
         }
 
         .tab.active {
             background: linear-gradient(135deg, #00f0ff, #7000ff);
             border-color: transparent;
             color: #fff;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
             transform: translateY(-2px);
         }
 
@@ -189,8 +167,8 @@
 
         .input-group input {
             flex: 1;
-            padding: 12px 16px;
-            background: rgba(0, 0, 0, 0.5);
+            padding: 13px 18px;
+            background: rgba(0, 0, 0, 0.6);
             border: 1px solid rgba(0, 240, 255, 0.3);
             border-radius: 12px;
             color: #fff;
@@ -201,30 +179,36 @@
 
         .input-group input:focus {
             border-color: #ff007f;
-            box-shadow: 0 0 12px rgba(255, 0, 127, 0.5);
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.6);
         }
 
+        /* Glowing Button Animation */
         .input-group button {
-            padding: 0 20px;
+            padding: 0 22px;
             background: linear-gradient(135deg, #ff007f, #7000ff);
             border: none;
             border-radius: 12px;
             color: #fff;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
             transition: all 0.3s ease;
+            animation: buttonGlow 3s infinite alternate;
+        }
+
+        @keyframes buttonGlow {
+            0% { box-shadow: 0 0 10px rgba(255, 0, 127, 0.4); }
+            100% { box-shadow: 0 0 25px rgba(0, 240, 255, 0.8); }
         }
 
         .input-group button:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 0 25px rgba(255, 0, 127, 0.7);
+            transform: translateY(-2px) scale(1.06);
         }
 
         .result-box {
             display: none;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(0, 240, 255, 0.3);
+            background: rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(0, 240, 255, 0.4);
             border-radius: 14px;
             padding: 12px;
             align-items: center;
@@ -278,23 +262,23 @@
         .btn-download {
             background: #00f0ff;
             color: #000;
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
         }
 
         .btn-download:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.9);
         }
 
         .btn-open {
             background: #7000ff;
             color: #fff;
-            box-shadow: 0 0 10px rgba(112, 0, 255, 0.5);
+            box-shadow: 0 0 12px rgba(112, 0, 255, 0.6);
         }
 
         .btn-open:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(112, 0, 255, 0.8);
+            box-shadow: 0 0 20px rgba(112, 0, 255, 0.9);
         }
 
         .loader {
@@ -311,7 +295,7 @@
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
             margin: 0 auto;
-            box-shadow: 0 0 10px #00f0ff;
+            box-shadow: 0 0 12px #00f0ff;
         }
 
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -329,18 +313,18 @@
             gap: 6px;
             background: linear-gradient(135deg, #25d366, #128c7e);
             color: #fff;
-            padding: 8px 18px;
+            padding: 9px 20px;
             border-radius: 30px;
             text-decoration: none;
             font-size: 12px;
             font-weight: 600;
-            box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
             transition: 0.3s;
         }
 
         .whatsapp-btn:hover {
-            transform: translateY(-2px) scale(1.03);
-            box-shadow: 0 0 25px rgba(37, 211, 102, 0.7);
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 0 30px rgba(37, 211, 102, 0.8);
         }
 
         @keyframes fadeIn {
@@ -351,22 +335,15 @@
 </head>
 <body>
 
-    <!-- Audio Tag with your attached file[span_2](start_span)[span_2](end_span) -->
-    <audio id="bgAudio" loop preload="auto">
-        <source src="AUD-20261010-WA0026.mp3" type="audio/mp3">
-    </audio>
-
-    <div class="lighting-orb orb-1"></div>
-    <div class="lighting-orb orb-2"></div>
+    <!-- Live Background Video Loop -->
+    <video class="bg-video" autoplay loop muted playsinline>
+        <source src="https://cdn.pixabay.com/video/2020/05/18/39077-422967664_large.mp4" type="video/mp4">
+    </video>
+    <div class="bg-overlay"></div>
 
     <div class="status-bar">
-        <div class="status-info">
-            <span id="liveTime"><i class="fa-regular fa-clock" style="color: #00f0ff;"></i> --:-- --</span>
-            <span id="liveDate"><i class="fa-regular fa-calendar-days" style="color: #ff007f;"></i> --/--/----</span>
-        </div>
-        <button class="audio-btn" id="audioToggleBtn" onclick="toggleAudio()">
-            <i class="fa-solid fa-volume-xmark"></i> Music Off
-        </button>
+        <span id="liveTime"><i class="fa-regular fa-clock" style="color: #00f0ff;"></i> --:-- --</span>
+        <span id="liveDate"><i class="fa-regular fa-calendar-days" style="color: #ff007f;"></i> --/--/----</span>
     </div>
 
     <div class="container">
@@ -426,45 +403,6 @@
         }
         setInterval(updateClock, 1000);
         updateClock();
-
-        const audio = document.getElementById('bgAudio');
-        audio.volume = 1.0;
-        const audioBtn = document.getElementById('audioToggleBtn');
-        let isPlaying = false;
-
-        function toggleAudio() {
-            if (isPlaying) {
-                audio.pause();
-                audioBtn.innerHTML = `<i class="fa-solid fa-volume-xmark"></i> Music Off`;
-                audioBtn.classList.remove('active');
-                isPlaying = false;
-            } else {
-                audio.play().then(() => {
-                    audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
-                    audioBtn.classList.add('active');
-                    isPlaying = true;
-                }).catch(err => {
-                    console.log("Audio play blocked:", err);
-                    alert("Audio play failed. Check if audio file 'AUD-20261010-WA0026.mp3' is uploaded in the root folder[span_3](start_span)[span_3](end_span).");
-                });
-            }
-        }
-
-        // Automatic audio unlock on first user click/touch
-        function unlockAudio() {
-            if (!isPlaying) {
-                audio.play().then(() => {
-                    audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
-                    audioBtn.classList.add('active');
-                    isPlaying = true;
-                    window.removeEventListener('click', unlockAudio);
-                    window.removeEventListener('touchstart', unlockAudio);
-                }).catch(e => console.log(e));
-            }
-        }
-
-        window.addEventListener('click', unlockAudio);
-        window.addEventListener('touchstart', unlockAudio);
 
         let currentPlatform = 'instagram';
 

@@ -415,7 +415,7 @@
             let ampm = hours >= 12 ? 'PM' : 'AM';
             hours = hours % 12 || 12;
 
-            document.getElementById('liveTime.innerHTML` || document.getElementById('liveTime').innerHTML = `<i class="fa-regular fa-clock" style="color: #00f0ff;"></i> ${hours}:${minutes} ${ampm}`;
+            document.getElementById('liveTime').innerHTML = `<i class="fa-regular fa-clock" style="color: #00f0ff;"></i> ${hours}:${minutes} ${ampm}`;
             
             const options = { day: 'numeric', month: 'short' };
             const dateStr = now.toLocaleDateString('en-US', options);

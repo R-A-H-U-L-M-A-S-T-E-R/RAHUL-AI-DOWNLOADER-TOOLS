@@ -14,110 +14,87 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        /* Auto-Changing Animated Background Gradient */
         body {
-            background: #030712;
+            background: linear-gradient(135deg, #0f172a, #1e1b4b, #311042);
+            background-size: 400% 400%;
+            animation: bgAnimation 12s ease infinite;
             color: #f8fafc;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
-            position: relative;
             overflow-x: hidden;
         }
 
-        /* Animated Lighting Background Orbs */
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(90px);
-            z-index: -1;
-            opacity: 0.6;
-            animation: float 8s ease-in-out infinite alternate;
-        }
-
-        .orb-1 {
-            top: -50px;
-            left: -50px;
-            width: 350px;
-            height: 350px;
-            background: linear-gradient(135deg, #a855f7, #6366f1);
-        }
-
-        .orb-2 {
-            bottom: -50px;
-            right: -50px;
-            width: 350px;
-            height: 350px;
-            background: linear-gradient(135deg, #06b6d4, #3b82f6);
-            animation-delay: -4s;
-        }
-
-        .orb-3 {
-            top: 40%;
-            left: 30%;
-            width: 250px;
-            height: 250px;
-            background: rgba(236, 72, 153, 0.3);
-            animation-duration: 12s;
-        }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(30px, 40px) scale(1.1); }
-        }
-
-        /* Container with Animated Neon Border */
-        .container {
-            max-width: 600px;
-            width: 100%;
-            margin: 40px auto;
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-radius: 24px;
-            padding: 30px;
-            position: relative;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .container::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 26px;
-            background: linear-gradient(45deg, #38bdf8, #a855f7, #ec4899, #38bdf8);
-            background-size: 400% 400%;
-            z-index: -1;
-            opacity: 0.4;
-            animation: glowBorder 6s linear infinite;
-        }
-
-        @keyframes glowBorder {
+        @keyframes bgAnimation {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
+        /* Moving Glowing Lighting Orbs */
+        .lighting-orb {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.7;
+            animation: moveOrbs 8s infinite alternate ease-in-out;
+        }
+
+        .orb-one {
+            top: 10%;
+            left: 10%;
+            background: #ec4899;
+        }
+
+        .orb-two {
+            bottom: 10%;
+            right: 10%;
+            background: #38bdf8;
+            animation-delay: -4s;
+        }
+
+        @keyframes moveOrbs {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(40px) scale(1.2); }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 550px;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+        }
+
         .header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .header h1 {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 700;
             background: linear-gradient(to right, #38bdf8, #c084fc, #ec4899);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 5px;
-            letter-spacing: 0.5px;
-            text-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
         }
 
         .header p {
-            font-size: 13px;
+            font-size: 12px;
             color: #94a3b8;
         }
 
@@ -125,67 +102,288 @@
         .tabs {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 25px;
+            gap: 8px;
+            margin-bottom: 20px;
         }
 
         .tab {
-            padding: 12px 8px;
+            padding: 10px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             color: #cbd5e1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .tab:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            transform: translateY(-2px);
+            transition: all 0.3s ease;
         }
 
         .tab.active {
             background: linear-gradient(135deg, #6366f1, #a855f7);
-            border-color: transparent;
+            border-color: #a855f7;
             color: #fff;
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
-            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
         }
 
         /* Input Form */
         .input-group {
             display: flex;
             gap: 10px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .input-group input {
             flex: 1;
-            padding: 14px 18px;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 14px;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
             color: #fff;
-            font-size: 14px;
+            font-size: 13px;
             outline: none;
-            transition: all 0.3s ease;
         }
 
         .input-group input:focus {
-            border-color: #a855f7;
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
-            background: rgba(0, 0, 0, 0.7);
+            border-color: #38bdf8;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
         }
 
         .input-group button {
-            padding: 0 24px;
+            padding: 0 20px;
             background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            transition: 0.2s;
+        }
+
+        .input-group button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Result Section */
+        .result-box {
+            display: none;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 12px;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .result-box img {
+            width: 90px;
+            height: 65px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .video-info {
+            flex: 1;
+        }
+
+        .video-info h4 {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #f1f5f9;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn {
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            border: none;
+        }
+
+        .btn-download { background: #10b981; color: #fff; }
+        .btn-open { background: #3b82f6; color: #fff; }
+
+        /* Loader */
+        .loader {
+            display: none;
+            text-align: center;
+            margin: 15px 0;
+        }
+        .spinner {
+            width: 25px;
+            height: 25px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: #38bdf8;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Footer */
+        .owner-footer {
+            text-align: center;
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #25d366;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Moving Background Lighting Orbs -->
+    <div class="lighting-orb orb-one"></div>
+    <div class="lighting-orb orb-two"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🚀 RAHUL-MASTER DOWNLOADER</h1>
+            <p>Download & Search Media Instantly</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active" onclick="switchPlatform('instagram', event)"><i class="fa-brands fa-instagram"></i> Insta DL</div>
+            <div class="tab" onclick="switchPlatform('facebook', event)"><i class="fa-brands fa-facebook"></i> FB DL</div>
+            <div class="tab" onclick="switchPlatform('video', event)"><i class="fa-solid fa-video"></i> Video Search</div>
+            <div class="tab" onclick="switchPlatform('play', event)"><i class="fa-solid fa-music"></i> Play DL</div>
+        </div>
+
+        <!-- Input Form -->
+        <div class="input-group">
+            <input type="text" id="videoUrl" placeholder="Paste Instagram link here...">
+            <button onclick="fetchMedia()"><i class="fa-solid fa-arrow-down"></i></button>
+        </div>
+
+        <!-- Loader -->
+        <div class="loader" id="loader">
+            <div class="spinner"></div>
+            <p style="font-size: 11px; margin-top: 5px; color: #38bdf8;">Fetching media...</p>
+        </div>
+
+        <!-- Result Card -->
+        <div class="result-box" id="resultBox">
+            <img id="thumbnail" src="" alt="Thumbnail">
+            <div class="video-info">
+                <h4 id="videoTitle">Media Ready</h4>
+                <div class="action-btns">
+                    <a id="downloadBtn" href="#" class="btn btn-download" download target="_blank"><i class="fa-solid fa-download"></i> Download</a>
+                    <a id="openBtn" href="#" class="btn btn-open" target="_blank"><i class="fa-solid fa-external-link-alt"></i> Open</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- WhatsApp Footer -->
+        <div class="owner-footer">
+            <a href="https://wa.me/919356730236?text=Hello%20RAHUL%20MASTER,%20I%20want%20to%20talk%20about%20your%20Master%20Downloader!" class="whatsapp-btn" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> Contact Owner on WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <script>
+        let currentPlatform = 'instagram';
+
+        function switchPlatform(platform, event) {
+            currentPlatform = platform;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            if(event) event.currentTarget.classList.add('active');
+            
+            const input = document.getElementById('videoUrl');
+            if (platform === 'instagram') {
+                input.placeholder = "Paste Instagram link here...";
+            } else if (platform === 'facebook') {
+                input.placeholder = "Paste Facebook link here...";
+            } else if (platform === 'video') {
+                input.placeholder = "Search video (e.g., Despacito official)...";
+            } else if (platform === 'play') {
+                input.placeholder = "Search song (e.g., Shape of You)...";
+            }
+            document.getElementById('resultBox').style.display = 'none';
+        }
+
+        async function fetchMedia() {
+            const queryVal = document.getElementById('videoUrl').value.trim();
+            if(!queryVal) {
+                alert("Please enter a valid URL or search query!");
+                return;
+            }
+
+            document.getElementById('loader').style.display = 'block';
+            document.getElementById('resultBox').style.display = 'none';
+
+            try {
+                let apiUrl = '';
+                if (currentPlatform === 'instagram') {
+                    apiUrl = `https://api.sayan-nexuswork.workers.dev/insta?url=${encodeURIComponent(queryVal)}`;
+                } else if (currentPlatform === 'facebook') {
+                    apiUrl = `https://api.sayan-nexuswork.workers.dev/facebook?url=${encodeURIComponent(queryVal)}`;
+                } else if (currentPlatform === 'video') {
+                    apiUrl = `https://api.sayan-nexuswork.workers.dev/video?query=${encodeURIComponent(queryVal)}`;
+                } else if (currentPlatform === 'play') {
+                    apiUrl = `https://api.sayan-nexuswork.workers.dev/play?query=${encodeURIComponent(queryVal)}`;
+                }
+
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                
+                document.getElementById('loader').style.display = 'none';
+
+                if (data) {
+                    const mediaLink = data.url || data.download_url || data.video_url || data.result || data.link;
+                    const thumb = data.thumbnail || data.cover || data.image || "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200";
+                    const title = data.title || data.name || "Song Download Ready";
+
+                    if (mediaLink) {
+                        document.getElementById('thumbnail').src = thumb;
+                        document.getElementById('videoTitle').innerText = title;
+                        
+                        document.getElementById('downloadBtn').href = mediaLink;
+                        document.getElementById('openBtn').href = mediaLink;
+
+                        document.getElementById('resultBox').style.display = 'flex';
+                    } else {
+                        alert("Could not retrieve media link from API response.");
+                    }
+                } else {
+                    alert("No data received from the API.");
+                }
+            } catch (error) {
+                document.getElementById('loader').style.display = 'none';
+                alert("API Request Error: " + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

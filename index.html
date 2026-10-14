@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAHUL-AI CLEAN DOWNLOADER | RAHUL MASTER</title>
+    <title>RAHUL-AI PREMIUM DOWNLOADER | RAHUL MASTER</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -26,7 +26,7 @@
             background: #090d16;
         }
 
-        /* Clean Status Bar */
+        /* Status Bar with Subtle Neon Glow */
         .status-bar {
             width: 100%;
             max-width: 480px;
@@ -34,12 +34,14 @@
             justify-content: space-between;
             align-items: center;
             background: #111827;
-            border: 1px solid #1e293b;
+            border: 1px solid rgba(56, 189, 248, 0.3);
             border-radius: 12px;
             padding: 10px 18px;
             margin-bottom: 15px;
             font-size: 12px;
             color: #94a3b8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+            animation: fadeInDown 0.6s ease;
         }
 
         .status-item {
@@ -48,15 +50,22 @@
             gap: 6px;
         }
 
-        /* Clean Solid Dark Container */
+        /* Container with Smooth Lighting Border Animation */
         .container {
             max-width: 480px;
             width: 100%;
             background: #111827;
-            border: 1px solid #1e293b;
             border-radius: 20px;
             padding: 28px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            animation: containerGlow 4s ease-in-out infinite alternate, fadeInUp 0.6s ease;
+        }
+
+        @keyframes containerGlow {
+            0% { border-color: rgba(56, 189, 248, 0.3); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 15px rgba(56, 189, 248, 0.1); }
+            100% { border-color: rgba(168, 85, 247, 0.5); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(168, 85, 247, 0.25); }
         }
 
         .header {
@@ -67,7 +76,9 @@
         .header h1 {
             font-size: 20px;
             font-weight: 700;
-            color: #f8fafc;
+            background: linear-gradient(135deg, #38bdf8, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 6px;
         }
 
@@ -87,10 +98,12 @@
         }
 
         .platforms-hint i {
-            transition: 0.2s;
+            transition: 0.3s;
         }
         .platforms-hint i:hover {
             color: #38bdf8;
+            transform: translateY(-3px) scale(1.15);
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
         }
 
         /* Input Group */
@@ -102,6 +115,12 @@
             border: 1px solid #334155;
             border-radius: 12px;
             padding: 6px;
+            transition: 0.3s;
+        }
+
+        .input-group:focus-within {
+            border-color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
         }
 
         .input-group input {
@@ -120,17 +139,19 @@
 
         .input-group button {
             padding: 0 20px;
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #38bdf8);
             border: none;
             border-radius: 8px;
             color: #fff;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.4);
         }
 
         .input-group button:hover {
-            background: #1d4ed8;
+            transform: scale(1.04);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
         }
 
         /* Result Box */
@@ -143,6 +164,7 @@
             align-items: center;
             gap: 12px;
             margin-bottom: 15px;
+            animation: fadeIn 0.4s ease;
         }
 
         .result-box img {
@@ -190,19 +212,23 @@
         .btn-download {
             background: #16a34a;
             color: #fff;
+            box-shadow: 0 0 10px rgba(22, 163, 74, 0.3);
         }
 
         .btn-download:hover {
-            background: #15803d;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(22, 163, 74, 0.6);
         }
 
         .btn-open {
             background: #0284c7;
             color: #fff;
+            box-shadow: 0 0 10px rgba(2, 132, 199, 0.3);
         }
 
         .btn-open:hover {
-            background: #0369a1;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(2, 132, 199, 0.6);
         }
 
         /* Loader */
@@ -220,6 +246,7 @@
             border-radius: 50%;
             animation: spin 0.6s linear infinite;
             margin: 0 auto;
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
         }
 
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -236,18 +263,35 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: #16a34a;
+            background: linear-gradient(135deg, #16a34a, #15803d);
             color: #fff;
             padding: 9px 20px;
             border-radius: 25px;
             text-decoration: none;
             font-size: 12px;
             font-weight: 600;
-            transition: 0.2s;
+            box-shadow: 0 0 12px rgba(22, 163, 74, 0.4);
+            transition: 0.3s;
         }
 
         .whatsapp-btn:hover {
-            background: #15803d;
+            transform: scale(1.04);
+            box-shadow: 0 0 18px rgba(22, 163, 74, 0.7);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -260,7 +304,7 @@
         <div class="status-item" id="batteryStatus"><i class="fa-solid fa-battery-half" style="color: #16a34a;"></i> --%</div>
     </div>
 
-    <!-- Main Clean Container -->
+    <!-- Main Container -->
     <div class="container">
         <div class="header">
             <h1>RAHUL-AI DOWNLOADER</h1>
@@ -297,7 +341,7 @@
         </div>
 
         <div class="owner-footer">
-            <a href="https://wa.me/919356730236?text=Hello%20RAHUL%20MASTER,%20I%20want%20to%20talk%20about%20your%20Clean%20Downloader!" class="whatsapp-btn" target="_blank">
+            <a href="https://wa.me/919356730236?text=Hello%20RAHUL%20MASTER,%20I%20want%20to%20talk%20about%20your%20Downloader!" class="whatsapp-btn" target="_blank">
                 <i class="fa-brands fa-whatsapp" style="font-size: 14px;"></i> Contact Owner on WhatsApp
             </a>
         </div>

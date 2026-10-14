@@ -60,21 +60,36 @@
             width: 100%;
             max-width: 520px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(15, 23, 42, 0.75);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(0, 240, 255, 0.4);
             border-radius: 14px;
             padding: 8px 16px;
             margin-bottom: 15px;
-            font-size: 12px;
+            font-size: 11px;
             color: #e2e8f0;
             box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
-            gap: 15px;
         }
 
-        /* Main Container with Fast Moving Cyber Border Animation (2 seconds speed) */
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Battery Charging Animation */
+        .charging-icon {
+            animation: bounceCharging 1s infinite alternate;
+        }
+
+        @keyframes bounceCharging {
+            0% { transform: scale(1); color: #00f0ff; }
+            100% { transform: scale(1.15); color: #25d366; }
+        }
+
+        /* Main Container with Fast Moving Cyber Border Animation */
         .container {
             max-width: 520px;
             width: 100%;
@@ -182,7 +197,6 @@
             box-shadow: 0 0 18px rgba(255, 0, 127, 0.8);
         }
 
-        /* High-Speed Glowing Button Animation (1 second pulse) */
         .input-group button {
             padding: 0 22px;
             background: linear-gradient(135deg, #ff007f, #7000ff);
@@ -347,8 +361,9 @@
     <div class="bg-overlay"></div>
 
     <div class="status-bar">
-        <span id="liveTime"><i class="fa-regular fa-clock" style="color: #00f0ff;"></i> --:-- --</span>
-        <span id="liveDate"><i class="fa-regular fa-calendar-days" style="color: #ff007f;"></i> --/--/----</span>
+        <div class="status-item" id="liveTime"><i class="fa-regular fa-clock" style="color: #00f0ff;"></i> --:-- --</div>
+        <div class="status-item" id="liveDate"><i class="fa-regular fa-calendar-days" style="color: #ff007f;"></i> --/--/----</div>
+        <div class="status-item" id="batteryStatus"><i class="fa-solid fa-battery-half" style="color: #25d366;"></i> --%</div>
     </div>
 
     <div class="container">
@@ -400,7 +415,7 @@
             let ampm = hours >= 12 ? 'PM' : 'AM';
             hours = hours % 12 || 12;
 
-            document.getElementById('liveTime').innerHTML = `<i class="fa-regular fa-clock" style="color: #00f0ff;"></i> ${hours}:${minutes} ${ampm}`;
+            document.getElementById('liveTime.innerHTML` || document.getElementById('liveTime').innerHTML = `<i class="fa-regular fa-clock" style="color: #00f0ff;"></i> ${hours}:${minutes} ${ampm}`;
             
             const options = { day: 'numeric', month: 'short' };
             const dateStr = now.toLocaleDateString('en-US', options);
@@ -408,6 +423,39 @@
         }
         setInterval(updateClock, 1000);
         updateClock();
+
+        // Live Battery Status Integration
+        async function initBattery() {
+            if ('getBattery' in navigator) {
+                try {
+                    const battery = await navigator.getBattery();
+                    function updateBatteryInfo() {
+                        const level = Math.floor(battery.level * 100);
+                        const isCharging = battery.charging;
+                        let iconClass = "fa-battery-full";
+                        let iconColor = "#25d366";
+
+                        if (level <= 20) { iconClass = "fa-battery-empty"; iconColor = "#ff007f"; }
+                        else if (level <= 50) { iconClass = "fa-battery-half"; iconColor = "#facc15"; }
+                        else if (level <= 80) { iconClass = "fa-battery-three-quarters"; iconColor = "#00f0ff"; }
+
+                        if (isCharging) {
+                            document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid fa-bolt charging-icon" style="color: #00f0ff;"></i> ${level}%`;
+                        } else {
+                            document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid ${iconClass}" style="color: ${iconColor};"></i> ${level}%`;
+                        }
+                    }
+                    updateBatteryInfo();
+                    battery.addEventListener('levelchange', updateBatteryInfo);
+                    battery.addEventListener('chargingchange', updateBatteryInfo);
+                } catch (e) {
+                    document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid fa-battery-bolt" style="color: #00f0ff;"></i> 100%`;
+                }
+            } else {
+                document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid fa-battery-bolt" style="color: #00f0ff;"></i> 100%`;
+            }
+        }
+        initBattery();
 
         let currentPlatform = 'instagram';
 

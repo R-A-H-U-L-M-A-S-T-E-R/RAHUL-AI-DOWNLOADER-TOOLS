@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAHUL-AI     DOWNLOADER | RAHUL MASTER</title>
+    <title>RAHUL-AI DOWNLOADER | RAHUL MASTER</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -12,10 +12,11 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
         }
 
         body {
-            color: #f1f5f9;
+            color: var(--text-color);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -24,7 +25,30 @@
             padding: 15px;
             overflow-x: hidden;
             position: relative;
-            background: #030105;
+            background: var(--bg-color);
+        }
+
+        /* Themes Variable Definition */
+        :root {
+            --bg-color: #030105;
+            --container-bg: #07080c;
+            --status-bg: #0b0c14;
+            --input-bg: #030407;
+            --text-color: #f1f5f9;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --orb-1: rgba(255, 0, 80, 0.3);
+            --orb-2: rgba(0, 120, 255, 0.3);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f0f4f8;
+            --container-bg: #ffffff;
+            --status-bg: #e2e8f0;
+            --input-bg: #f8fafc;
+            --text-color: #0f172a;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --orb-1: rgba(255, 0, 80, 0.15);
+            --orb-2: rgba(0, 120, 255, 0.15);
         }
 
         /* Fast Pulsing Red & Blue Background Lighting Effects */
@@ -59,7 +83,7 @@
             left: -10%;
             width: 50vw;
             height: 50vw;
-            background: rgba(255, 0, 80, 0.3);
+            background: var(--orb-1);
             border-radius: 50%;
             filter: blur(80px);
             z-index: -2;
@@ -72,7 +96,7 @@
             right: -10%;
             width: 50vw;
             height: 50vw;
-            background: rgba(0, 120, 255, 0.3);
+            background: var(--orb-2);
             border-radius: 50%;
             filter: blur(80px);
             z-index: -2;
@@ -102,18 +126,26 @@
             background-size: 25px 25px;
         }
 
-        /* Status Bar */
-        .status-bar {
+        /* Top Bar Wrapper for Status & Theme Toggle */
+        .top-wrapper {
             width: 100%;
             max-width: 480px;
             display: flex;
+            gap: 10px;
+            margin-bottom: 18px;
+            align-items: center;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            flex: 1;
+            display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #0b0c14;
+            background: var(--status-bg);
             border: 1px solid rgba(0, 120, 255, 0.4);
             border-radius: 14px;
             padding: 10px 18px;
-            margin-bottom: 18px;
             font-size: 12px;
             color: #94a3b8;
             box-shadow: 0 0 20px rgba(0, 120, 255, 0.2);
@@ -125,17 +157,39 @@
             gap: 6px;
         }
 
+        /* Theme Toggle Animated Button */
+        .theme-toggle-btn {
+            background: var(--status-bg);
+            border: 1px solid rgba(255, 0, 76, 0.4);
+            border-radius: 14px;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: #ff004c;
+            font-size: 18px;
+            box-shadow: 0 0 15px rgba(255, 0, 76, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.1) rotate(15deg);
+            background: rgba(255, 0, 76, 0.15);
+        }
+
         /* Main Container */
         .container {
             max-width: 480px;
             width: 100%;
-            background: #07080c;
+            background: var(--container-bg);
             border-radius: 24px;
             padding: 28px;
             position: relative;
             z-index: 1;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
             animation: smoothContainerFloat 4s ease-in-out infinite alternate;
         }
 
@@ -187,8 +241,8 @@
             display: flex;
             gap: 10px;
             margin-bottom: 15px;
-            background: #030407;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 6px;
             transition: all 0.3s ease;
@@ -204,7 +258,7 @@
             background: transparent;
             border: none;
             padding: 10px 14px;
-            color: #fff;
+            color: var(--text-color);
             font-size: 13px;
             outline: none;
         }
@@ -238,8 +292,8 @@
         }
 
         .quick-btn {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(128, 128, 128, 0.08);
+            border: 1px solid var(--border-color);
             border-radius: 10px;
             padding: 9px;
             color: #94a3b8;
@@ -256,14 +310,14 @@
         .quick-btn:hover {
             background: rgba(0, 120, 255, 0.2);
             border-color: #0080ff;
-            color: #fff;
+            color: var(--text-color);
         }
 
         /* Result Box */
         .result-box {
             display: none;
-            background: #030407;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 12px;
             align-items: center;
@@ -282,7 +336,7 @@
             height: 60px;
             object-fit: cover;
             border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
         }
 
         .video-info {
@@ -294,7 +348,7 @@
             font-size: 12px;
             font-weight: 600;
             margin-bottom: 8px;
-            color: #f8fafc;
+            color: var(--text-color);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -350,7 +404,7 @@
         .spinner {
             width: 26px;
             height: 26px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
+            border: 3px solid rgba(128, 128, 128, 0.2);
             border-top-color: #ff004c;
             border-radius: 50%;
             animation: spin 0.6s linear infinite;
@@ -364,7 +418,7 @@
             text-align: center;
             margin-top: 15px;
             padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid var(--border-color);
         }
 
         .whatsapp-btn {
@@ -394,17 +448,22 @@
     <div class="ambient-orb-2"></div>
     <div class="bg-grid"></div>
 
-    <!-- Status Bar -->
-    <div class="status-bar">
-        <div class="status-item" id="liveTime"><i class="fa-regular fa-clock" style="color: #ff004c;"></i> --:-- --</div>
-        <div class="status-item" id="liveDate"><i class="fa-regular fa-calendar-days" style="color: #0080ff;"></i> --/--/----</div>
-        <div class="status-item" id="batteryStatus"><i class="fa-solid fa-battery-half" style="color: #10b981;"></i> --%</div>
+    <!-- Top Wrapper (Status Bar & Animated Theme Toggle Button) -->
+    <div class="top-wrapper">
+        <div class="status-bar">
+            <div class="status-item" id="liveTime"><i class="fa-regular fa-clock" style="color: #ff004c;"></i> --:-- --</div>
+            <div class="status-item" id="liveDate"><i class="fa-regular fa-calendar-days" style="color: #0080ff;"></i> --/--/----</div>
+            <div class="status-item" id="batteryStatus"><i class="fa-solid fa-battery-half" style="color: #10b981;"></i> --%</div>
+        </div>
+        <button class="theme-toggle-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+            <i class="fa-solid fa-moon" id="themeIcon"></i>
+        </button>
     </div>
 
     <!-- Main Container -->
     <div class="container">
         <div class="header">
-            <h1>RAHUL-AI        DOWNLOADER</h1>
+            <h1>RAHUL-AI DOWNLOADER</h1>
             <p>Paste link or search video title directly</p>
         </div>
 
@@ -454,6 +513,20 @@
     </div>
 
     <script>
+        // Theme Toggle Logic with Animation
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            
+            if (html.getAttribute('data-theme') === 'light') {
+                html.removeAttribute('data-theme');
+                themeIcon.className = "fa-solid fa-moon";
+            } else {
+                html.setAttribute('data-theme', 'light');
+                themeIcon.className = "fa-solid fa-sun";
+            }
+        }
+
         // Live Clock and Date
         function updateClock() {
             const now = new Date();

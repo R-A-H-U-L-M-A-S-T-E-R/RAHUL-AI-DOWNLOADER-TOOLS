@@ -35,9 +35,9 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            background: radial-gradient(circle at 10% 20%, rgba(147, 51, 234, 0.25), transparent 40%),
-                        radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.25), transparent 40%),
-                        radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.2), transparent 50%);
+            background: radial-gradient(circle at 10% 20%, rgba(147, 51, 234, 0.3), transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.3), transparent 40%),
+                        radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.25), transparent 50%);
             animation: auroraFlow 10s ease infinite alternate;
         }
 
@@ -53,37 +53,63 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(2, 6, 23, 0.65);
+            background: rgba(2, 6, 23, 0.6);
             backdrop-filter: blur(40px);
             -webkit-backdrop-filter: blur(40px);
             z-index: -1;
         }
 
-        /* Status Bar */
+        /* Status Bar with Lighting Animation */
         .status-bar {
             width: 100%;
             max-width: 480px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(30, 41, 59, 0.5);
+            background: rgba(30, 41, 59, 0.6);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(168, 85, 247, 0.5);
             border-radius: 16px;
             padding: 10px 18px;
             margin-bottom: 15px;
             font-size: 12px;
-            color: #cbd5e1;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            color: #e2e8f0;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.35), inset 0 0 10px rgba(59, 130, 246, 0.2);
+            animation: statusBarGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes statusBarGlow {
+            0% { 
+                border-color: #a855f7; 
+                box-shadow: 0 0 15px rgba(168, 85, 247, 0.4), inset 0 0 8px rgba(168, 85, 247, 0.2); 
+            }
+            50% { 
+                border-color: #3b82f6; 
+                box-shadow: 0 0 25px rgba(59, 130, 246, 0.6), inset 0 0 12px rgba(59, 130, 246, 0.4); 
+            }
+            100% { 
+                border-color: #ec4899; 
+                box-shadow: 0 0 20px rgba(236, 72, 153, 0.4), inset 0 0 8px rgba(236, 72, 153, 0.2); 
+            }
         }
 
         .status-item {
             display: flex;
             align-items: center;
             gap: 6px;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
         }
 
-        /* Main Glass Card with Smooth Gradient Glow Animation */
+        .status-item i {
+            animation: iconPulse 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes iconPulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 3px currentColor); }
+            100% { transform: scale(1.15); filter: drop-shadow(0 0 8px currentColor); }
+        }
+
+        /* Main Glass Card with Cyber Neon Border Lighting Animation */
         .container {
             max-width: 480px;
             width: 100%;
@@ -92,15 +118,36 @@
             -webkit-backdrop-filter: blur(30px);
             border-radius: 28px;
             padding: 28px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            animation: cardFloat 6s ease-in-out infinite;
+            border: 2px solid #a855f7;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 
+                        0 0 30px rgba(168, 85, 247, 0.5), 
+                        inset 0 0 20px rgba(168, 85, 247, 0.25);
+            animation: borderLighting 4s linear infinite, cardFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes borderLighting {
+            0% { 
+                border-color: #a855f7; 
+                box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 25px rgba(168, 85, 247, 0.6), inset 0 0 15px rgba(168, 85, 247, 0.3);
+            }
+            33% { 
+                border-color: #3b82f6; 
+                box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 25px rgba(59, 130, 246, 0.6), inset 0 0 15px rgba(59, 130, 246, 0.3);
+            }
+            66% { 
+                border-color: #ec4899; 
+                box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 25px rgba(236, 72, 153, 0.6), inset 0 0 15px rgba(236, 72, 153, 0.3);
+            }
+            100% { 
+                border-color: #a855f7; 
+                box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 25px rgba(168, 85, 247, 0.6), inset 0 0 15px rgba(168, 85, 247, 0.3);
+            }
         }
 
         @keyframes cardFloat {
-            0%, 100% { transform: translateY(0); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(147, 51, 234, 0.2); }
-            50% { transform: translateY(-6px); box-shadow: 0 35px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(59, 130, 246, 0.3); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
 
         .header {
@@ -116,6 +163,7 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 6px;
             letter-spacing: -0.5px;
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
         }
 
         .header p {
@@ -124,13 +172,13 @@
             font-weight: 400;
         }
 
-        /* Supported Platform Badges */
+        /* Supported Platform Badges with Glow */
         .platforms-hint {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 14px;
             margin-bottom: 18px;
-            font-size: 16px;
+            font-size: 18px;
             color: #94a3b8;
         }
 
@@ -139,24 +187,26 @@
         }
         .platforms-hint i:hover {
             color: #a855f7;
-            transform: scale(1.2);
+            transform: scale(1.25);
+            filter: drop-shadow(0 0 10px #a855f7);
         }
 
-        /* Input Group Animation */
+        /* Input Group with Lighting Border */
         .input-group {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
-            background: rgba(2, 6, 23, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(2, 6, 23, 0.7);
+            border: 1px solid rgba(168, 85, 247, 0.4);
             border-radius: 16px;
             padding: 6px;
             transition: all 0.3s ease;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
         }
 
         .input-group:focus-within {
-            border-color: #a855f7;
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.35);
+            border-color: #ec4899;
+            box-shadow: 0 0 25px rgba(236, 72, 153, 0.6), inset 0 0 10px rgba(236, 72, 153, 0.3);
         }
 
         .input-group input {
@@ -182,24 +232,30 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
+            animation: buttonGlow 2s infinite alternate;
+        }
+
+        @keyframes buttonGlow {
+            0% { box-shadow: 0 0 10px rgba(168, 85, 247, 0.5); }
+            100% { box-shadow: 0 0 22px rgba(59, 130, 246, 0.9); }
         }
 
         .input-group button:hover {
             transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
         }
 
         /* Result Box Animation */
         .result-box {
             display: none;
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(168, 85, 247, 0.3);
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(59, 130, 246, 0.5);
             border-radius: 16px;
             padding: 12px;
             align-items: center;
             gap: 12px;
             margin-bottom: 15px;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
             animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -213,7 +269,7 @@
             height: 60px;
             object-fit: cover;
             border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .video-info {
@@ -253,23 +309,23 @@
         .btn-download {
             background: linear-gradient(135deg, #10b981, #059669);
             color: #fff;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
         }
 
         .btn-download:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.5);
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.8);
         }
 
         .btn-open {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: #fff;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
         }
 
         .btn-open:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.8);
         }
 
         /* Loader */
@@ -287,16 +343,17 @@
             border-radius: 50%;
             animation: spin 0.7s linear infinite;
             margin: 0 auto;
+            box-shadow: 0 0 15px #a855f7;
         }
 
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Footer WhatsApp Button */
+        /* Footer WhatsApp Button with Lighting Effect */
         .owner-footer {
             text-align: center;
             margin-top: 15px;
             padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .whatsapp-btn {
@@ -310,13 +367,18 @@
             text-decoration: none;
             font-size: 12px;
             font-weight: 600;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
             transition: 0.3s;
+            animation: wpGlow 1.5s infinite alternate;
+        }
+
+        @keyframes wpGlow {
+            0% { box-shadow: 0 0 10px rgba(37, 211, 102, 0.4); }
+            100% { box-shadow: 0 0 25px rgba(37, 211, 102, 0.9); }
         }
 
         .whatsapp-btn:hover {
             transform: translateY(-2px) scale(1.03);
-            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
         }
     </style>
 </head>
@@ -326,17 +388,17 @@
     <div class="aurora-bg"></div>
     <div class="bg-overlay"></div>
 
-    <!-- Status Bar -->
+    <!-- Status Bar with Lighting Animation -->
     <div class="status-bar">
         <div class="status-item" id="liveTime"><i class="fa-regular fa-clock" style="color: #a855f7;"></i> --:-- --</div>
         <div class="status-item" id="liveDate"><i class="fa-regular fa-calendar-days" style="color: #3b82f6;"></i> --/--/----</div>
         <div class="status-item" id="batteryStatus"><i class="fa-solid fa-battery-half" style="color: #10b981;"></i> --%</div>
     </div>
 
-    <!-- Main Card -->
+    <!-- Main Card with Cyber Neon Border Lighting -->
     <div class="container">
         <div class="header">
-            <h1>⚡ RAHUL UNIVERSAL AI</h1>
+            <h1>⚡ RAHUL AI ALL VIDEOS DOWNLOADER</h1>
             <p>Paste any link & download instantly</p>
         </div>
 
@@ -355,7 +417,7 @@
 
         <div class="loader" id="loader">
             <div class="spinner"></div>
-            <p style="font-size: 11px; margin-top: 6px; color: #a855f7;">Detecting & fetching media...</p>
+            <p style="font-size: 11px; margin-top: 6px; color: #a855f7; text-shadow: 0 0 8px #a855f7;">Detecting & fetching media...</p>
         </div>
 
         <div class="result-box" id="resultBox">
@@ -394,7 +456,7 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Battery Status Integration
+        // Battery Status Integration with Lighting Effects
         async function initBattery() {
             if ('getBattery' in navigator) {
                 try {
@@ -438,14 +500,12 @@
             document.getElementById('resultBox').style.display = 'none';
 
             try {
-                // Smart auto-detection based on URL contents
                 let apiUrl = '';
                 if (queryVal.includes('instagram.com')) {
                     apiUrl = `https://api.sayan-nexuswork.workers.dev/insta?url=${encodeURIComponent(queryVal)}`;
                 } else if (queryVal.includes('facebook.com') || queryVal.includes('fb.watch') || queryVal.includes('fb.me')) {
                     apiUrl = `https://api.sayan-nexuswork.workers.dev/facebook?url=${encodeURIComponent(queryVal)}`;
                 } else {
-                    // Default universal fallback or video handler
                     apiUrl = `https://api.sayan-nexuswork.workers.dev/video?query=${encodeURIComponent(queryVal)}`;
                 }
 

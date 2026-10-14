@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAHUL-AI  DOWNLOADER | RAHUL MASTER</title>
+    <title>RAHUL-AI CYBER DOWNLOADER | RAHUL MASTER</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -24,10 +24,10 @@
             padding: 15px;
             overflow-x: hidden;
             position: relative;
-            background: #05050a;
+            background: #02040a;
         }
 
-        /* Cyberpunk Grid & Laser Beam Background Animation */
+        /* Subtle Background Cyber Grid */
         .cyber-grid {
             position: fixed;
             top: 0;
@@ -36,58 +36,26 @@
             height: 100%;
             z-index: -2;
             background-image: 
-                linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-            animation: gridMove 20s linear infinite;
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 35px 35px;
         }
 
-        @keyframes gridMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 30px 30px; }
-        }
-
-        .bg-glow-orb {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255, 0, 127, 0.2) 0%, rgba(0, 240, 255, 0.1) 50%, transparent 80%);
-            z-index: -1;
-            filter: blur(60px);
-            animation: orbPulse 6s ease-in-out infinite alternate;
-        }
-
-        @keyframes orbPulse {
-            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
-            100% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
-        }
-
-        /* Status Bar with Laser Glow */
+        /* Status Bar with Neon Glow */
         .status-bar {
             width: 100%;
             max-width: 480px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(10, 10, 25, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid #00f0ff;
-            border-radius: 12px;
+            background: #070913;
+            border: 1px solid rgba(0, 240, 255, 0.5);
+            border-radius: 14px;
             padding: 10px 18px;
             margin-bottom: 15px;
             font-size: 12px;
             color: #fff;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4), inset 0 0 8px rgba(0, 240, 255, 0.2);
-            animation: statusLaser 3s infinite alternate;
-        }
-
-        @keyframes statusLaser {
-            0% { border-color: #00f0ff; box-shadow: 0 0 10px rgba(0, 240, 255, 0.4); }
-            50% { border-color: #ff007f; box-shadow: 0 0 20px rgba(255, 0, 127, 0.6); }
-            100% { border-color: #39ff14; box-shadow: 0 0 15px rgba(57, 255, 20, 0.5); }
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
         }
 
         .status-item {
@@ -96,22 +64,19 @@
             gap: 6px;
         }
 
-        /* Main Card with Rotating Cyber Neon Border Lighting */
+        /* Main Black Box with Pure Border Lighting Animation */
         .container {
             max-width: 480px;
             width: 100%;
-            background: rgba(12, 12, 24, 0.85);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
+            background: #05070f; /* Pure Solid Dark Black Interior */
+            border-radius: 26px;
             padding: 28px;
             position: relative;
             z-index: 1;
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 35px rgba(0, 240, 255, 0.25);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
         }
 
-        /* Moving Border Neon Light Effect */
+        /* Moving Neon Light Border Effect (Strictly on Border) */
         .container::before {
             content: '';
             position: absolute;
@@ -119,11 +84,11 @@
             background: linear-gradient(45deg, #00f0ff, #ff007f, #39ff14, #7000ff, #00f0ff);
             background-size: 400%;
             z-index: -1;
-            border-radius: 26px;
-            animation: cyberBorderNeon 6s linear infinite;
+            border-radius: 28px;
+            animation: neonBorderFlow 5s linear infinite;
         }
 
-        @keyframes cyberBorderNeon {
+        @keyframes neonBorderFlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
@@ -143,7 +108,7 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 6px;
             letter-spacing: 1px;
-            filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.5));
+            filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4));
         }
 
         .header p {
@@ -164,12 +129,11 @@
 
         .platforms-hint i {
             transition: 0.3s;
-            filter: drop-shadow(0 0 5px rgba(0, 240, 255, 0.4));
         }
         .platforms-hint i:hover {
             color: #ff007f;
             transform: scale(1.3) translateY(-3px);
-            filter: drop-shadow(0 0 12px #ff007f);
+            filter: drop-shadow(0 0 10px #ff007f);
         }
 
         /* Input Group */
@@ -177,17 +141,16 @@
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid #00f0ff;
+            background: #020308;
+            border: 1px solid rgba(0, 240, 255, 0.4);
             border-radius: 14px;
             padding: 6px;
-            box-shadow: inset 0 0 12px rgba(0, 240, 255, 0.2);
             transition: 0.3s;
         }
 
         .input-group:focus-within {
             border-color: #ff007f;
-            box-shadow: 0 0 20px rgba(255, 0, 127, 0.6), inset 0 0 10px rgba(255, 0, 127, 0.3);
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
         }
 
         .input-group input {
@@ -205,7 +168,7 @@
         }
 
         .input-group button {
-            padding: 0 22px;
+            padding: 0 20px;
             background: linear-gradient(135deg, #00f0ff, #7000ff);
             border: none;
             border-radius: 10px;
@@ -213,13 +176,7 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
-            animation: btnPulse 2s infinite alternate;
-        }
-
-        @keyframes btnPulse {
-            0% { box-shadow: 0 0 10px rgba(0, 240, 255, 0.4); }
-            100% { box-shadow: 0 0 25px rgba(255, 0, 127, 0.8); }
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
         }
 
         .input-group button:hover {
@@ -229,20 +186,14 @@
         /* Result Box */
         .result-box {
             display: none;
-            background: rgba(10, 15, 30, 0.9);
+            background: #090d1a;
             border: 1px solid #39ff14;
             border-radius: 14px;
             padding: 12px;
             align-items: center;
             gap: 12px;
             margin-bottom: 15px;
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
-            animation: fadeInResult 0.4s ease;
-        }
-
-        @keyframes fadeInResult {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.25);
         }
 
         .result-box img {
@@ -290,23 +241,21 @@
         .btn-download {
             background: #39ff14;
             color: #000;
-            box-shadow: 0 0 12px rgba(57, 255, 20, 0.6);
         }
 
         .btn-download:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.9);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.7);
         }
 
         .btn-open {
             background: #00f0ff;
             color: #000;
-            box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
         }
 
         .btn-open:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.9);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.7);
         }
 
         /* Loader */
@@ -317,14 +266,13 @@
         }
 
         .spinner {
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             border: 3px solid rgba(255, 255, 255, 0.1);
             border-top-color: #ff007f;
             border-radius: 50%;
             animation: spin 0.6s linear infinite;
             margin: 0 auto;
-            box-shadow: 0 0 15px #ff007f;
         }
 
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -334,7 +282,7 @@
             text-align: center;
             margin-top: 15px;
             padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .whatsapp-btn {
@@ -348,14 +296,8 @@
             text-decoration: none;
             font-size: 12px;
             font-weight: 600;
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.5);
             transition: 0.3s;
-            animation: wpNeon 1.5s infinite alternate;
-        }
-
-        @keyframes wpNeon {
-            0% { box-shadow: 0 0 10px rgba(37, 211, 102, 0.4); }
-            100% { box-shadow: 0 0 25px rgba(37, 211, 102, 0.9); }
         }
 
         .whatsapp-btn:hover {
@@ -365,9 +307,7 @@
 </head>
 <body>
 
-    <!-- Cyber Background Elements -->
     <div class="cyber-grid"></div>
-    <div class="bg-glow-orb"></div>
 
     <!-- Status Bar -->
     <div class="status-bar">
@@ -376,7 +316,7 @@
         <div class="status-item" id="batteryStatus"><i class="fa-solid fa-battery-half" style="color: #39ff14;"></i> --%</div>
     </div>
 
-    <!-- Main Cyber Card -->
+    <!-- Main Black Card with Neon Border Lighting -->
     <div class="container">
         <div class="header">
             <h1>RAHUL-AI CYBER DOWNLOADER</h1>
@@ -399,7 +339,7 @@
 
         <div class="loader" id="loader">
             <div class="spinner"></div>
-            <p style="font-size: 11px; margin-top: 6px; color: #ff007f; text-shadow: 0 0 8px #ff007f;">Analyzing & Fetching Media...</p>
+            <p style="font-size: 11px; margin-top: 6px; color: #ff007f;">Analyzing & Fetching Media...</p>
         </div>
 
         <div class="result-box" id="resultBox">
@@ -483,7 +423,6 @@
 
             try {
                 let apiUrl = '';
-                // Automatically check link domains and map to appropriate API handler
                 if (queryVal.includes('instagram.com')) {
                     apiUrl = `https://api.sayan-nexuswork.workers.dev/insta?url=${encodeURIComponent(queryVal)}`;
                 } else if (queryVal.includes('facebook.com') || queryVal.includes('fb.watch') || queryVal.includes('fb.me')) {
@@ -492,7 +431,7 @@
                     apiUrl = `https://api.sayan-nexuswork.workers.dev/video?query=${encodeURIComponent(queryVal)}`;
                 }
 
-                const response = await fetch(apiUrl);
+                const response = andFetch = await fetch(apiUrl);
                 const data = await response.json();
                 
                 document.getElementById('loader').style.display = 'none';

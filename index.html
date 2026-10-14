@@ -89,7 +89,7 @@
             gap: 6px;
         }
 
-        /* Main Container with Smooth Border Lighting Animation */
+        /* Main Container (Solid Dark, No Border Light Animation) */
         .container {
             max-width: 480px;
             width: 100%;
@@ -99,27 +99,8 @@
             position: relative;
             z-index: 1;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
-            border: 2px solid transparent;
-            background-clip: padding-box;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             animation: smoothContainerFloat 6s ease-in-out infinite alternate;
-        }
-
-        /* Normal Lighting Animation on Border */
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            background: linear-gradient(135deg, #ff003c, #0070ff, #ff0080, #ff003c);
-            background-size: 300% 300%;
-            z-index: -1;
-            border-radius: 26px;
-            animation: borderLightFlow 4s linear infinite;
-        }
-
-        @keyframes borderLightFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
 
         @keyframes smoothContainerFloat {
@@ -212,7 +193,7 @@
             opacity: 0.9;
         }
 
-        /* Extra Quick Action Buttons Grid */
+        /* Quick Action Buttons Grid */
         .quick-buttons {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -401,7 +382,6 @@
             <button onclick="autoFetchMedia()"><i class="fa-solid fa-bolt"></i></button>
         </div>
 
-        <!-- Extra Feature Buttons Added -->
         <div class="quick-buttons">
             <button class="quick-btn" onclick="setPlatformHint('instagram.com')"><i class="fa-brands fa-instagram" style="color: #ff0055;"></i> Instagram</button>
             <button class="quick-btn" onclick="setPlatformHint('facebook.com')"><i class="fa-brands fa-facebook" style="color: #0070ff;"></i> Facebook</button>

@@ -27,7 +27,6 @@
             position: relative;
         }
 
-        /* Dynamic Animated Gradient Background */
         body::before {
             content: '';
             position: fixed;
@@ -47,7 +46,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Glowing Background Lighting Orbs */
         .lighting-orb {
             position: absolute;
             width: 300px;
@@ -67,7 +65,6 @@
             100% { transform: scale(1.2) translateY(30px); opacity: 0.8; }
         }
 
-        /* Top Bar: Time, Date & Audio Toggle */
         .status-bar {
             width: 100%;
             max-width: 520px;
@@ -92,10 +89,10 @@
         }
 
         .audio-btn {
-            background: #00f0ff;
+            background: rgba(0, 240, 255, 0.15);
             border: 1px solid rgba(0, 240, 255, 0.4);
-            color: #000;
-            padding: 4px 12px;
+            color: #00f0ff;
+            padding: 5px 12px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 11px;
@@ -103,16 +100,15 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            box-shadow: 0 0 10px #00f0ff;
             transition: all 0.3s;
         }
 
-        .audio-btn:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
+        .audio-btn.active {
+            background: #00f0ff;
+            color: #000;
+            box-shadow: 0 0 15px #00f0ff;
         }
 
-        /* Container with Neon Glowing Border */
         .container {
             max-width: 520px;
             width: 100%;
@@ -152,7 +148,6 @@
             color: #94a3b8;
         }
 
-        /* Platform Tabs */
         .tabs {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -186,7 +181,6 @@
             transform: translateY(-2px);
         }
 
-        /* Input Form */
         .input-group {
             display: flex;
             gap: 10px;
@@ -227,7 +221,6 @@
             box-shadow: 0 0 25px rgba(255, 0, 127, 0.7);
         }
 
-        /* Result Section */
         .result-box {
             display: none;
             background: rgba(0, 0, 0, 0.5);
@@ -304,7 +297,6 @@
             box-shadow: 0 0 15px rgba(112, 0, 255, 0.8);
         }
 
-        /* Loader */
         .loader {
             display: none;
             text-align: center;
@@ -324,7 +316,6 @@
 
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Footer WhatsApp Button */
         .owner-footer {
             text-align: center;
             margin-top: 15px;
@@ -360,34 +351,30 @@
 </head>
 <body>
 
-    <!-- Background Audio Element -->
-    <audio id="bgAudio" loop autoplay preload="auto">
+    <!-- Working Background Audio -->
+    <audio id="bgAudio" loop preload="auto">
         <source src="https://tmpfiles.org/dl/wFAyKHPx7TG8/file_1791971001575.ogg" type="audio/ogg">
     </audio>
 
-    <!-- Background Lighting Orbs -->
     <div class="lighting-orb orb-1"></div>
     <div class="lighting-orb orb-2"></div>
 
-    <!-- Status Bar (Simple Time, Date & Audio Toggle) -->
     <div class="status-bar">
         <div class="status-info">
             <span id="liveTime"><i class="fa-regular fa-clock" style="color: #00f0ff;"></i> --:-- --</span>
             <span id="liveDate"><i class="fa-regular fa-calendar-days" style="color: #ff007f;"></i> --/--/----</span>
         </div>
-        <button class="audio-btn" id="audioToggleBtn" onclick="toggleAudio()">
+        <button class="audio-btn active" id="audioToggleBtn" onclick="toggleAudio()">
             <i class="fa-solid fa-volume-high"></i> Music On
         </button>
     </div>
 
-    <!-- Main Container -->
     <div class="container">
         <div class="header">
             <h1>🚀 RAHUL-AI DOWNLOADER</h1>
             <p>Download & Search Media Instantly</p>
         </div>
 
-        <!-- Tabs -->
         <div class="tabs">
             <div class="tab active" onclick="switchPlatform('instagram', event)"><i class="fa-brands fa-instagram"></i> Insta DL</div>
             <div class="tab" onclick="switchPlatform('facebook', event)"><i class="fa-brands fa-facebook"></i> FB DL</div>
@@ -395,19 +382,16 @@
             <div class="tab" onclick="switchPlatform('play', event)"><i class="fa-solid fa-music"></i> Play DL</div>
         </div>
 
-        <!-- Input Form -->
         <div class="input-group">
             <input type="text" id="videoUrl" placeholder="Paste Instagram link here...">
             <button onclick="fetchMedia()"><i class="fa-solid fa-arrow-down"></i></button>
         </div>
 
-        <!-- Loader -->
         <div class="loader" id="loader">
             <div class="spinner"></div>
             <p style="font-size: 11px; margin-top: 5px; color: #00f0ff;">Fetching media...</p>
         </div>
 
-        <!-- Result Card -->
         <div class="result-box" id="resultBox">
             <img id="thumbnail" src="" alt="Thumbnail">
             <div class="video-info">
@@ -419,7 +403,6 @@
             </div>
         </div>
 
-        <!-- WhatsApp Footer -->
         <div class="owner-footer">
             <a href="https://wa.me/919356730236?text=Hello%20RAHUL%20MASTER,%20I%20want%20to%20talk%20about%20your%20Master%20Downloader!" class="whatsapp-btn" target="_blank">
                 <i class="fa-brands fa-whatsapp" style="font-size: 14px;"></i> Contact Owner on WhatsApp
@@ -428,7 +411,6 @@
     </div>
 
     <script>
-        // --- 1. Simple Live Time & Date Display ---
         function updateClock() {
             const now = new Date();
             let hours = now.getHours();
@@ -445,51 +427,39 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // --- 2. Background Audio Control & Auto-Play ---
         const audio = document.getElementById('bgAudio');
         const audioBtn = document.getElementById('audioToggleBtn');
-        let isPlaying = true;
+        let isPlaying = false;
 
         function toggleAudio() {
             if (isPlaying) {
                 audio.pause();
                 audioBtn.innerHTML = `<i class="fa-solid fa-music"></i> Music Off`;
-                audioBtn.style.background = "rgba(0, 240, 255, 0.15)";
-                audioBtn.style.color = "#00f0ff";
-                audioBtn.style.boxShadow = "none";
+                audioBtn.classList.remove('active');
                 isPlaying = false;
             } else {
                 audio.play().then(() => {
                     audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
-                    audioBtn.style.background = "#00f0ff";
-                    audioBtn.style.color = "#000";
-                    audioBtn.style.boxShadow = "0 0 10px #00f0ff";
+                    audioBtn.classList.add('active');
                     isPlaying = true;
                 }).catch(err => console.log(err));
             }
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            audio.play().then(() => {
-                isPlaying = true;
-            }).catch(() => {
-                const startAudio = () => {
-                    audio.play().then(() => {
-                        audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
-                        audioBtn.style.background = "#00f0ff";
-                        audioBtn.style.color = "#000";
-                        audioBtn.style.boxShadow = "0 0 10px #00f0ff";
-                        isPlaying = true;
-                        window.removeEventListener('click', startAudio);
-                        window.removeEventListener('touchstart', startAudio);
-                    });
-                };
-                window.addEventListener('click', startAudio);
-                window.addEventListener('touchstart', startAudio);
-            });
-        });
+        // Auto play on first click/touch anywhere on screen (browser security bypass)
+        function triggerAudioPlay() {
+            if (!isPlaying) {
+                audio.play().then(() => {
+                    audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
+                    audioBtn.classList.add('active');
+                    isPlaying = true;
+                }).catch(e => console.log(e));
+            }
+        }
 
-        // --- 3. Downloader Platform Functions ---
+        window.addEventListener('click', triggerAudioPlay, { once: true });
+        window.addEventListener('touchstart', triggerAudioPlay, { once: true });
+
         let currentPlatform = 'instagram';
 
         function switchPlatform(platform, event) {
@@ -532,7 +502,7 @@
                     apiUrl = `https://api.sayan-nexuswork.workers.dev/play?query=${encodeURIComponent(queryVal)}`;
                 }
 
-                const response = await fetch(apiUrl);
+                const response =alerta = await fetch(apiUrl);
                 const data = await response.json();
                 
                 document.getElementById('loader').style.display = 'none';

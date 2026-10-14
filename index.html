@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RAHUL-AI DOWNLOADER TOOLS | RAHUL MASTER</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,69 +14,108 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        /* Auto-Changing Animated Background Gradient */
         body {
-            background: linear-gradient(135deg, #0f172a, #1e1b4b, #311042);
-            background-size: 400% 400%;
-            animation: bgAnimation 12s ease infinite;
             color: #f8fafc;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
             overflow-x: hidden;
+            position: relative;
+            background: #030712;
         }
 
-        @keyframes bgAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Live Video Background Layer */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: brightness(0.4) contrast(1.2);
         }
 
-        /* Moving Glowing Lighting Orbs */
-        .lighting-orb {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            filter: blur(100px);
+        /* Overlay Animated RGB Lighting Particles */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(168, 85, 247, 0.35), transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(56, 189, 248, 0.35), transparent 50%),
+                        radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.25), transparent 60%);
             z-index: -1;
-            opacity: 0.7;
-            animation: moveOrbs 8s infinite alternate ease-in-out;
+            animation: pulseBg 6s infinite alternate ease-in-out;
         }
 
-        .orb-one {
-            top: 10%;
-            left: 10%;
-            background: #ec4899;
+        @keyframes pulseBg {
+            0% { transform: scale(1); filter: hue-rotate(0deg); }
+            100% { transform: scale(1.1); filter: hue-rotate(360deg); }
         }
 
-        .orb-two {
-            bottom: 10%;
-            right: 10%;
-            background: #38bdf8;
-            animation-delay: -4s;
+        /* Top Bar: Time & Battery Widget */
+        .widget-bar {
+            width: 100%;
+            max-width: 550px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 8px 18px;
+            margin-bottom: 12px;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
         }
 
-        @keyframes moveOrbs {
-            0% { transform: translateY(0) scale(1); }
-            100% { transform: translateY(40px) scale(1.2); }
+        .clock-box {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: #38bdf8;
+            text-shadow: 0 0 10px #38bdf8;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        /* Main Container */
+        .battery-box {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: #10b981;
+            text-shadow: 0 0 10px #10b981;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Main Container with Auto-Changing RGB Border Glow */
         .container {
             max-width: 550px;
             width: 100%;
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border-radius: 24px;
             padding: 25px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
             position: relative;
+            border: 2px solid transparent;
+            animation: rainbowBorder 8s linear infinite;
+        }
+
+        @keyframes rainbowBorder {
+            0% { border-color: #38bdf8; box-shadow: 0 0 20px rgba(56, 189, 248, 0.4); }
+            33% { border-color: #a855f7; box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
+            66% { border-color: #ec4899; box-shadow: 0 0 20px rgba(236, 72, 153, 0.4); }
+            100% { border-color: #38bdf8; box-shadow: 0 0 20px rgba(56, 189, 248, 0.4); }
         }
 
         .header {
@@ -91,11 +130,12 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 5px;
+            text-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
         }
 
         .header p {
             font-size: 12px;
-            color: #94a3b8;
+            color: #cbd5e1;
         }
 
         /* Platform Tabs */
@@ -110,7 +150,7 @@
             padding: 10px;
             text-align: center;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 12px;
             cursor: pointer;
             font-size: 12px;
@@ -123,7 +163,7 @@
             background: linear-gradient(135deg, #6366f1, #a855f7);
             border-color: #a855f7;
             color: #fff;
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.7);
         }
 
         /* Input Form */
@@ -146,7 +186,7 @@
 
         .input-group input:focus {
             border-color: #38bdf8;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
         }
 
         .input-group button {
@@ -157,7 +197,7 @@
             color: #fff;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);
             transition: 0.2s;
         }
 
@@ -168,8 +208,8 @@
         /* Result Section */
         .result-box {
             display: none;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 16px;
             padding: 12px;
             align-items: center;
@@ -205,7 +245,7 @@
         }
 
         .btn {
-            padding: 5px 12px;
+            padding: 6px 12px;
             border-radius: 8px;
             font-size: 11px;
             font-weight: 500;
@@ -217,8 +257,8 @@
             border: none;
         }
 
-        .btn-download { background: #10b981; color: #fff; }
-        .btn-open { background: #3b82f6; color: #fff; }
+        .btn-download { background: #10b981; color: #fff; box-shadow: 0 0 10px rgba(16, 185, 129, 0.5); }
+        .btn-open { background: #3b82f6; color: #fff; box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
 
         /* Loader */
         .loader {
@@ -256,16 +296,36 @@
             text-decoration: none;
             font-size: 12px;
             font-weight: 600;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+            transition: 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.03);
         }
     </style>
 </head>
 <body>
 
-    <!-- Moving Background Lighting Orbs -->
-    <div class="lighting-orb orb-one"></div>
-    <div class="lighting-orb orb-two"></div>
+    <!-- 1. Live Animated Background Video -->
+    <video class="bg-video" autoplay loop muted playsinline>
+        <source src="https://cdn.pixabay.com/video/2021/04/12/70884-536968038_large.mp4" type="video/mp4">
+    </video>
+    <div class="bg-overlay"></div>
 
+    <!-- 2. Live Clock & Battery Widget Bar -->
+    <div class="widget-bar">
+        <div class="clock-box">
+            <i class="fa-regular fa-clock"></i>
+            <span id="liveTime">00:00:00</span>
+        </div>
+        <div class="battery-box">
+            <i id="batteryIcon" class="fa-solid fa-battery-full"></i>
+            <span id="batteryLevel">--%</span>
+        </div>
+    </div>
+
+    <!-- 3. Main Tool Box -->
     <div class="container">
         <div class="header">
             <h1>🚀 RAHUL-AI DOWNLOADER</h1>
@@ -313,6 +373,48 @@
     </div>
 
     <script>
+        // --- 1. Live Real-Time Clock Function ---
+        function updateClock() {
+            const now = new Date();
+            let h = String(now.getHours()).padStart(2, '0');
+            let m = String(now.getMinutes()).padStart(2, '0');
+            let s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('liveTime').innerText = `${h}:${m}:${s}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // --- 2. Live Battery Status Function ---
+        if ('getBattery' in navigator) {
+            navigator.getBattery().then(function(battery) {
+                function updateBattery() {
+                    const level = Math.round(battery.level * 100);
+                    document.getElementById('batteryLevel').innerText = `${level}%`;
+
+                    const icon = document.getElementById('batteryIcon');
+                    if (battery.charging) {
+                        icon.className = "fa-solid fa-battery-bolt";
+                        icon.style.color = "#38bdf8";
+                    } else if (level > 70) {
+                        icon.className = "fa-solid fa-battery-full";
+                        icon.style.color = "#10b981";
+                    } else if (level > 30) {
+                        icon.className = "fa-solid fa-battery-half";
+                        icon.style.color = "#f59e0b";
+                    } else {
+                        icon.className = "fa-solid fa-battery-quarter";
+                        icon.style.color = "#ef4444";
+                    }
+                }
+                updateBattery();
+                battery.addEventListener('levelchange', updateBattery);
+                battery.addEventListener('chargingchange', updateBattery);
+            });
+        } else {
+            document.getElementById('batteryLevel').innerText = "N/A";
+        }
+
+        // --- 3. Downloader Functionalities ---
         let currentPlatform = 'instagram';
 
         function switchPlatform(platform, event) {

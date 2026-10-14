@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAHUL-AI DOWNLOADER | RAHUL MASTER</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>RAHUL-AI CYBERPUNK DOWNLOADER | RAHUL MASTER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -15,7 +15,7 @@
         }
 
         body {
-            color: #f1f5f9;
+            color: #00f0ff;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -24,130 +24,109 @@
             padding: 15px;
             overflow-x: hidden;
             position: relative;
-            background: #020617;
+            background: #05050a;
         }
 
-        /* Dynamic Aurora Background Animation */
-        .aurora-bg {
+        /* Cyberpunk Grid & Laser Beam Background Animation */
+        .cyber-grid {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -2;
-            background: radial-gradient(circle at 10% 20%, rgba(147, 51, 234, 0.3), transparent 40%),
-                        radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.3), transparent 40%),
-                        radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.25), transparent 50%);
-            animation: auroraFlow 10s ease infinite alternate;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: gridMove 20s linear infinite;
         }
 
-        @keyframes auroraFlow {
-            0% { transform: scale(1) rotate(0deg); filter: hue-rotate(0deg); }
-            50% { transform: scale(1.1) rotate(5deg); filter: hue-rotate(180deg); }
-            100% { transform: scale(1) rotate(0deg); filter: hue-rotate(360deg); }
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 30px 30px; }
         }
 
-        .bg-overlay {
+        .bg-glow-orb {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(2, 6, 23, 0.6);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 0, 127, 0.2) 0%, rgba(0, 240, 255, 0.1) 50%, transparent 80%);
             z-index: -1;
+            filter: blur(60px);
+            animation: orbPulse 6s ease-in-out infinite alternate;
         }
 
-        /* Status Bar with Lighting Animation */
+        @keyframes orbPulse {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+        }
+
+        /* Status Bar with Laser Glow */
         .status-bar {
             width: 100%;
             max-width: 480px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(168, 85, 247, 0.5);
-            border-radius: 16px;
+            background: rgba(10, 10, 25, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #00f0ff;
+            border-radius: 12px;
             padding: 10px 18px;
             margin-bottom: 15px;
             font-size: 12px;
-            color: #e2e8f0;
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.35), inset 0 0 10px rgba(59, 130, 246, 0.2);
-            animation: statusBarGlow 3s ease-in-out infinite alternate;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4), inset 0 0 8px rgba(0, 240, 255, 0.2);
+            animation: statusLaser 3s infinite alternate;
         }
 
-        @keyframes statusBarGlow {
-            0% { 
-                border-color: #a855f7; 
-                box-shadow: 0 0 15px rgba(168, 85, 247, 0.4), inset 0 0 8px rgba(168, 85, 247, 0.2); 
-            }
-            50% { 
-                border-color: #3b82f6; 
-                box-shadow: 0 0 25px rgba(59, 130, 246, 0.6), inset 0 0 12px rgba(59, 130, 246, 0.4); 
-            }
-            100% { 
-                border-color: #ec4899; 
-                box-shadow: 0 0 20px rgba(236, 72, 153, 0.4), inset 0 0 8px rgba(236, 72, 153, 0.2); 
-            }
+        @keyframes statusLaser {
+            0% { border-color: #00f0ff; box-shadow: 0 0 10px rgba(0, 240, 255, 0.4); }
+            50% { border-color: #ff007f; box-shadow: 0 0 20px rgba(255, 0, 127, 0.6); }
+            100% { border-color: #39ff14; box-shadow: 0 0 15px rgba(57, 255, 20, 0.5); }
         }
 
         .status-item {
             display: flex;
             align-items: center;
             gap: 6px;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
         }
 
-        .status-item i {
-            animation: iconPulse 1.5s ease-in-out infinite alternate;
-        }
-
-        @keyframes iconPulse {
-            0% { transform: scale(1); filter: drop-shadow(0 0 3px currentColor); }
-            100% { transform: scale(1.15); filter: drop-shadow(0 0 8px currentColor); }
-        }
-
-        /* Main Glass Card with Cyber Neon Border Lighting Animation */
+        /* Main Card with Rotating Cyber Neon Border Lighting */
         .container {
             max-width: 480px;
             width: 100%;
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-radius: 28px;
+            background: rgba(12, 12, 24, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
             padding: 28px;
             position: relative;
-            border: 2px solid #a855f7;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 
-                        0 0 30px rgba(168, 85, 247, 0.5), 
-                        inset 0 0 20px rgba(168, 85, 247, 0.25);
-            animation: borderLighting 4s linear infinite, cardFloat 6s ease-in-out infinite;
+            z-index: 1;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 35px rgba(0, 240, 255, 0.25);
         }
 
-        @keyframes borderLighting {
-            0% { 
-                border-color: #a855f7; 
-                box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 25px rgba(168, 85, 247, 0.6), inset 0 0 15px rgba(168, 85, 247, 0.3);
-            }
-            33% { 
-                border-color: #3b82f6; 
-                box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 25px rgba(59, 130, 246, 0.6), inset 0 0 15px rgba(59, 130, 246, 0.3);
-            }
-            66% { 
-                border-color: #ec4899; 
-                box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 25px rgba(236, 72, 153, 0.6), inset 0 0 15px rgba(236, 72, 153, 0.3);
-            }
-            100% { 
-                border-color: #a855f7; 
-                box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 25px rgba(168, 85, 247, 0.6), inset 0 0 15px rgba(168, 85, 247, 0.3);
-            }
+        /* Moving Border Neon Light Effect */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, #00f0ff, #ff007f, #39ff14, #7000ff, #00f0ff);
+            background-size: 400%;
+            z-index: -1;
+            border-radius: 26px;
+            animation: cyberBorderNeon 6s linear infinite;
         }
 
-        @keyframes cardFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+        @keyframes cyberBorderNeon {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .header {
@@ -156,57 +135,59 @@
         }
 
         .header h1 {
-            font-size: 22px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #a855f7, #3b82f6, #ec4899);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            background: linear-gradient(to right, #00f0ff, #ff007f, #39ff14);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 6px;
-            letter-spacing: -0.5px;
-            text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+            letter-spacing: 1px;
+            filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.5));
         }
 
         .header p {
-            font-size: 12px;
+            font-size: 11px;
             color: #94a3b8;
-            font-weight: 400;
+            letter-spacing: 0.5px;
         }
 
-        /* Supported Platform Badges with Glow */
+        /* Supported Platform Icons */
         .platforms-hint {
             display: flex;
             justify-content: center;
-            gap: 14px;
+            gap: 16px;
             margin-bottom: 18px;
             font-size: 18px;
-            color: #94a3b8;
+            color: #00f0ff;
         }
 
         .platforms-hint i {
             transition: 0.3s;
+            filter: drop-shadow(0 0 5px rgba(0, 240, 255, 0.4));
         }
         .platforms-hint i:hover {
-            color: #a855f7;
-            transform: scale(1.25);
-            filter: drop-shadow(0 0 10px #a855f7);
+            color: #ff007f;
+            transform: scale(1.3) translateY(-3px);
+            filter: drop-shadow(0 0 12px #ff007f);
         }
 
-        /* Input Group with Lighting Border */
+        /* Input Group */
         .input-group {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
-            background: rgba(2, 6, 23, 0.7);
-            border: 1px solid rgba(168, 85, 247, 0.4);
-            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #00f0ff;
+            border-radius: 14px;
             padding: 6px;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+            box-shadow: inset 0 0 12px rgba(0, 240, 255, 0.2);
+            transition: 0.3s;
         }
 
         .input-group:focus-within {
-            border-color: #ec4899;
-            box-shadow: 0 0 25px rgba(236, 72, 153, 0.6), inset 0 0 10px rgba(236, 72, 153, 0.3);
+            border-color: #ff007f;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.6), inset 0 0 10px rgba(255, 0, 127, 0.3);
         }
 
         .input-group input {
@@ -224,43 +205,43 @@
         }
 
         .input-group button {
-            padding: 0 20px;
-            background: linear-gradient(135deg, #a855f7, #6366f1);
+            padding: 0 22px;
+            background: linear-gradient(135deg, #00f0ff, #7000ff);
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             color: #fff;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
-            animation: buttonGlow 2s infinite alternate;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+            animation: btnPulse 2s infinite alternate;
         }
 
-        @keyframes buttonGlow {
-            0% { box-shadow: 0 0 10px rgba(168, 85, 247, 0.5); }
-            100% { box-shadow: 0 0 22px rgba(59, 130, 246, 0.9); }
+        @keyframes btnPulse {
+            0% { box-shadow: 0 0 10px rgba(0, 240, 255, 0.4); }
+            100% { box-shadow: 0 0 25px rgba(255, 0, 127, 0.8); }
         }
 
         .input-group button:hover {
             transform: scale(1.05);
         }
 
-        /* Result Box Animation */
+        /* Result Box */
         .result-box {
             display: none;
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(59, 130, 246, 0.5);
-            border-radius: 16px;
+            background: rgba(10, 15, 30, 0.9);
+            border: 1px solid #39ff14;
+            border-radius: 14px;
             padding: 12px;
             align-items: center;
             gap: 12px;
             margin-bottom: 15px;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-            animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+            animation: fadeInResult 0.4s ease;
         }
 
-        @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(15px); }
+        @keyframes fadeInResult {
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -268,8 +249,8 @@
             width: 80px;
             height: 60px;
             object-fit: cover;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            border: 1px solid #39ff14;
         }
 
         .video-info {
@@ -281,7 +262,7 @@
             font-size: 12px;
             font-weight: 600;
             margin-bottom: 8px;
-            color: #f8fafc;
+            color: #fff;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -307,25 +288,25 @@
         }
 
         .btn-download {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: #fff;
-            box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+            background: #39ff14;
+            color: #000;
+            box-shadow: 0 0 12px rgba(57, 255, 20, 0.6);
         }
 
         .btn-download:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(16, 185, 129, 0.8);
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.9);
         }
 
         .btn-open {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            color: #fff;
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+            background: #00f0ff;
+            color: #000;
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
         }
 
         .btn-open:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(59, 130, 246, 0.8);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.9);
         }
 
         /* Loader */
@@ -339,16 +320,16 @@
             width: 28px;
             height: 28px;
             border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top-color: #a855f7;
+            border-top-color: #ff007f;
             border-radius: 50%;
-            animation: spin 0.7s linear infinite;
+            animation: spin 0.6s linear infinite;
             margin: 0 auto;
-            box-shadow: 0 0 15px #a855f7;
+            box-shadow: 0 0 15px #ff007f;
         }
 
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Footer WhatsApp Button with Lighting Effect */
+        /* Footer WhatsApp */
         .owner-footer {
             text-align: center;
             margin-top: 15px;
@@ -369,37 +350,37 @@
             font-weight: 600;
             box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
             transition: 0.3s;
-            animation: wpGlow 1.5s infinite alternate;
+            animation: wpNeon 1.5s infinite alternate;
         }
 
-        @keyframes wpGlow {
+        @keyframes wpNeon {
             0% { box-shadow: 0 0 10px rgba(37, 211, 102, 0.4); }
             100% { box-shadow: 0 0 25px rgba(37, 211, 102, 0.9); }
         }
 
         .whatsapp-btn:hover {
-            transform: translateY(-2px) scale(1.03);
+            transform: scale(1.04);
         }
     </style>
 </head>
 <body>
 
-    <!-- Dynamic Background Elements -->
-    <div class="aurora-bg"></div>
-    <div class="bg-overlay"></div>
+    <!-- Cyber Background Elements -->
+    <div class="cyber-grid"></div>
+    <div class="bg-glow-orb"></div>
 
-    <!-- Status Bar with Lighting Animation -->
+    <!-- Status Bar -->
     <div class="status-bar">
-        <div class="status-item" id="liveTime"><i class="fa-regular fa-clock" style="color: #a855f7;"></i> --:-- --</div>
-        <div class="status-item" id="liveDate"><i class="fa-regular fa-calendar-days" style="color: #3b82f6;"></i> --/--/----</div>
-        <div class="status-item" id="batteryStatus"><i class="fa-solid fa-battery-half" style="color: #10b981;"></i> --%</div>
+        <div class="status-item" id="liveTime"><i class="fa-regular fa-clock" style="color: #00f0ff;"></i> --:-- --</div>
+        <div class="status-item" id="liveDate"><i class="fa-regular fa-calendar-days" style="color: #ff007f;"></i> --/--/----</div>
+        <div class="status-item" id="batteryStatus"><i class="fa-solid fa-battery-half" style="color: #39ff14;"></i> --%</div>
     </div>
 
-    <!-- Main Card with Cyber Neon Border Lighting -->
+    <!-- Main Cyber Card -->
     <div class="container">
         <div class="header">
-            <h1>⚡ RAHUL AI ALL VIDEOS DOWNLOADER</h1>
-            <p>Paste any link & download instantly</p>
+            <h1>RAHUL-AI CYBER DOWNLOADER</h1>
+            <p>Paste any platform link for instant extraction</p>
         </div>
 
         <div class="platforms-hint">
@@ -408,16 +389,17 @@
             <i class="fa-brands fa-youtube" title="YouTube"></i>
             <i class="fa-brands fa-tiktok" title="TikTok"></i>
             <i class="fa-brands fa-twitter" title="Twitter/X"></i>
+            <i class="fa-brands fa-pinterest" title="Pinterest"></i>
         </div>
 
         <div class="input-group">
-            <input type="text" id="videoUrl" placeholder="Paste any app link here (Insta, FB, YT)...">
-            <button onclick="fetchUniversalMedia()"><i class="fa-solid fa-download"></i></button>
+            <input type="text" id="videoUrl" placeholder="Paste any video link here (Insta, FB, YT, etc.)...">
+            <button onclick="autoFetchMedia()"><i class="fa-solid fa-bolt"></i></button>
         </div>
 
         <div class="loader" id="loader">
             <div class="spinner"></div>
-            <p style="font-size: 11px; margin-top: 6px; color: #a855f7; text-shadow: 0 0 8px #a855f7;">Detecting & fetching media...</p>
+            <p style="font-size: 11px; margin-top: 6px; color: #ff007f; text-shadow: 0 0 8px #ff007f;">Analyzing & Fetching Media...</p>
         </div>
 
         <div class="result-box" id="resultBox">
@@ -426,13 +408,13 @@
                 <h4 id="videoTitle">Media Ready</h4>
                 <div class="action-btns">
                     <a id="downloadBtn" href="#" class="btn btn-download" download target="_blank"><i class="fa-solid fa-download"></i> Download</a>
-                    <a id="openBtn" href="#" class="btn btn-open" target="_blank"><i class="fa-solid fa-external-link-alt"></i> Open</a>
+                    <a id="openBtn" href="#" class="btn btn-open" target="_blank"><i class="fa-solid fa-external-link-alt"></i> Stream</a>
                 </div>
             </div>
         </div>
 
         <div class="owner-footer">
-            <a href="https://wa.me/919356730236?text=Hello%20RAHUL%20MASTER,%20I%20want%20to%20talk%20about%20your%20Universal%20Downloader!" class="whatsapp-btn" target="_blank">
+            <a href="https://wa.me/919356730236?text=Hello%20RAHUL%20MASTER,%20I%20want%20to%20talk%20about%20your%20Cyber%20Downloader!" class="whatsapp-btn" target="_blank">
                 <i class="fa-brands fa-whatsapp" style="font-size: 15px;"></i> Contact Owner on WhatsApp
             </a>
         </div>
@@ -447,16 +429,16 @@
             let ampm = hours >= 12 ? 'PM' : 'AM';
             hours = hours % 12 || 12;
 
-            document.getElementById('liveTime').innerHTML = `<i class="fa-regular fa-clock" style="color: #a855f7;"></i> ${hours}:${minutes} ${ampm}`;
+            document.getElementById('liveTime').innerHTML = `<i class="fa-regular fa-clock" style="color: #00f0ff;"></i> ${hours}:${minutes} ${ampm}`;
             
             const options = { day: 'numeric', month: 'short' };
             const dateStr = now.toLocaleDateString('en-US', options);
-            document.getElementById('liveDate').innerHTML = `<i class="fa-regular fa-calendar-days" style="color: #3b82f6;"></i> ${dateStr}`;
+            document.getElementById('liveDate').innerHTML = `<i class="fa-regular fa-calendar-days" style="color: #ff007f;"></i> ${dateStr}`;
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Battery Status Integration with Lighting Effects
+        // Battery Status
         async function initBattery() {
             if ('getBattery' in navigator) {
                 try {
@@ -465,13 +447,13 @@
                         const level = Math.floor(battery.level * 100);
                         const isCharging = battery.charging;
                         let iconClass = "fa-battery-full";
-                        let iconColor = "#10b981";
+                        let iconColor = "#39ff14";
 
-                        if (level <= 20) { iconClass = "fa-battery-empty"; iconColor = "#ef4444"; }
-                        else if (level <= 50) { iconClass = "fa-battery-half"; iconColor = "#f59e0b"; }
+                        if (level <= 20) { iconClass = "fa-battery-empty"; iconColor = "#ff007f"; }
+                        else if (level <= 50) { iconClass = "fa-battery-half"; iconColor = "#00f0ff"; }
 
                         if (isCharging) {
-                            document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid fa-bolt" style="color: #38bdf8;"></i> ${level}%`;
+                            document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid fa-bolt" style="color: #00f0ff;"></i> ${level}%`;
                         } else {
                             document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid ${iconClass}" style="color: ${iconColor};"></i> ${level}%`;
                         }
@@ -480,19 +462,19 @@
                     battery.addEventListener('levelchange', updateBatteryInfo);
                     battery.addEventListener('chargingchange', updateBatteryInfo);
                 } catch (e) {
-                    document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid fa-battery-bolt" style="color: #38bdf8;"></i> 100%`;
+                    document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid fa-battery-bolt" style="color: #00f0ff;"></i> 100%`;
                 }
             } else {
-                document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid fa-battery-bolt" style="color: #38bdf8;"></i> 100%`;
+                document.getElementById('batteryStatus').innerHTML = `<i class="fa-solid fa-battery-bolt" style="color: #00f0ff;"></i> 100%`;
             }
         }
         initBattery();
 
-        // Universal Smart Auto-Detection Downloader Function
-        async function fetchUniversalMedia() {
+        // Universal Auto-Detection Downloader Engine
+        async function autoFetchMedia() {
             const queryVal = document.getElementById('videoUrl').value.trim();
             if(!queryVal) {
-                alert("Please paste a valid video link or URL!");
+                alert("Please paste a valid link!");
                 return;
             }
 
@@ -501,6 +483,7 @@
 
             try {
                 let apiUrl = '';
+                // Automatically check link domains and map to appropriate API handler
                 if (queryVal.includes('instagram.com')) {
                     apiUrl = `https://api.sayan-nexuswork.workers.dev/insta?url=${encodeURIComponent(queryVal)}`;
                 } else if (queryVal.includes('facebook.com') || queryVal.includes('fb.watch') || queryVal.includes('fb.me')) {
@@ -517,7 +500,7 @@
                 if (data) {
                     const mediaLink = data.url || data.download_url || data.video_url || data.result || data.link;
                     const thumb = data.thumbnail || data.cover || data.image || "https://images.unsplash.com/photo-1611671755657-f3942ec15b13?w=300";
-                    const title = data.title || data.name || "Media Download Ready";
+                    const title = data.title || data.name || "Media File Download Ready";
 
                     if (mediaLink) {
                         document.getElementById('thumbnail').src = thumb;
@@ -528,14 +511,14 @@
 
                         document.getElementById('resultBox').style.display = 'flex';
                     } else {
-                        alert("Could not extract download link. Please check the URL.");
+                        alert("Could not extract download link. Please verify the link.");
                     }
                 } else {
-                    alert("No data received from server.");
+                    alert("No response data from server.");
                 }
             } catch (error) {
                 document.getElementById('loader').style.display = 'none';
-                alert("Request Error: " + error.message);
+                alert("Connection Error: " + error.message);
             }
         }
     </script>

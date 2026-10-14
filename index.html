@@ -89,9 +89,9 @@
         }
 
         .audio-btn {
-            background: #00f0ff;
+            background: rgba(0, 240, 255, 0.15);
             border: 1px solid rgba(0, 240, 255, 0.4);
-            color: #000;
+            color: #00f0ff;
             padding: 5px 12px;
             border-radius: 20px;
             cursor: pointer;
@@ -100,13 +100,13 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            box-shadow: 0 0 10px #00f0ff;
             transition: all 0.3s;
         }
 
-        .audio-btn:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
+        .audio-btn.active {
+            background: #00f0ff;
+            color: #000;
+            box-shadow: 0 0 15px #00f0ff;
         }
 
         .container {
@@ -351,9 +351,9 @@
 </head>
 <body>
 
-    <!-- Working Audio with Full Volume -->
-    <audio id="bgAudio" loop autoplay preload="auto">
-        <source src="https://tmpfiles.org/dl/wFAyKHPx7TG8/file_1791971001575.ogg" type="audio/ogg">
+    <!-- Attached Custom Audio File -->
+    <audio id="bgAudio" loop preload="auto">
+        <source src="AUD-20261010-WA0026.mp3" type="audio/mp3">
     </audio>
 
     <div class="lighting-orb orb-1"></div>
@@ -365,7 +365,7 @@
             <span id="liveDate"><i class="fa-regular fa-calendar-days" style="color: #ff007f;"></i> --/--/----</span>
         </div>
         <button class="audio-btn" id="audioToggleBtn" onclick="toggleAudio()">
-            <i class="fa-solid fa-volume-high"></i> Music On
+            <i class="fa-solid fa-volume-xmark"></i> Music Off
         </button>
     </div>
 
@@ -428,49 +428,40 @@
         updateClock();
 
         const audio = document.getElementById('bgAudio');
-        audio.volume = 1.0; // Full Volume Set Kela Ahe
+        audio.volume = 1.0;
         const audioBtn = document.getElementById('audioToggleBtn');
-        let isPlaying = true;
+        let isPlaying = false;
 
         function toggleAudio() {
             if (isPlaying) {
                 audio.pause();
-                audioBtn.innerHTML = `<i class="fa-solid fa-music"></i> Music Off`;
-                audioBtn.style.background = "rgba(0, 240, 255, 0.15)";
-                audioBtn.style.color = "#00f0ff";
-                audioBtn.style.boxShadow = "none";
+                audioBtn.innerHTML = `<i class="fa-solid fa-volume-xmark"></i> Music Off`;
+                audioBtn.classList.remove('active');
                 isPlaying = false;
             } else {
                 audio.play().then(() => {
                     audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
-                    audioBtn.style.background = "#00f0ff";
-                    audioBtn.style.color = "#000";
-                    audioBtn.style.boxShadow = "0 0 10px #00f0ff";
+                    audioBtn.classList.add('active');
                     isPlaying = true;
-                }).catch(err => console.log(err));
+                }).catch(err => console.log("Audio play error:", err));
             }
         }
 
-        // Screen var kuthepan touch kelyavar audio 100% play hoil
-        window.addEventListener('DOMContentLoaded', () => {
-            audio.play().then(() => {
-                isPlaying = true;
-            }).catch(() => {
-                const startAudio = () => {
-                    audio.play().then(() => {
-                        audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
-                        audioBtn.style.background = "#00f0ff";
-                        audioBtn.style.color = "#000";
-                        audioBtn.style.boxShadow = "0 0 10px #00f0ff";
-                        isPlaying = true;
-                        window.removeEventListener('click', startAudio);
-                        window.removeEventListener('touchstart', startAudio);
-                    });
-                };
-                window.addEventListener('click', startAudio);
-                window.addEventListener('touchstart', startAudio);
-            });
-        });
+        // Screen var kuthepan click/touch kelyavar audio play hoil (Browser Autoplay Policy Fix)
+        function enableAudioOnInteraction() {
+            if (!isPlaying) {
+                audio.play().then(() => {
+                    audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
+                    audioBtn.classList.add('active');
+                    isPlaying = true;
+                    window.removeEventListener('click', enableAudioOnInteraction);
+                    window.removeEventListener('touchstart', enableAudioOnInteraction);
+                }).catch(e => console.log(e));
+            }
+        }
+
+        window.addEventListener('click', enableAudioOnInteraction);
+        window.addEventListener('touchstart', enableAudioOnInteraction);
 
         let currentPlatform = 'instagram';
 

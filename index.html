@@ -89,9 +89,9 @@
         }
 
         .audio-btn {
-            background: rgba(0, 240, 255, 0.15);
+            background: #00f0ff;
             border: 1px solid rgba(0, 240, 255, 0.4);
-            color: #00f0ff;
+            color: #000;
             padding: 5px 12px;
             border-radius: 20px;
             cursor: pointer;
@@ -100,13 +100,13 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            box-shadow: 0 0 10px #00f0ff;
             transition: all 0.3s;
         }
 
-        .audio-btn.active {
-            background: #00f0ff;
-            color: #000;
-            box-shadow: 0 0 15px #00f0ff;
+        .audio-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
         }
 
         .container {
@@ -351,8 +351,8 @@
 </head>
 <body>
 
-    <!-- Working Background Audio -->
-    <audio id="bgAudio" loop preload="auto">
+    <!-- Working Audio with Full Volume -->
+    <audio id="bgAudio" loop autoplay preload="auto">
         <source src="https://tmpfiles.org/dl/wFAyKHPx7TG8/file_1791971001575.ogg" type="audio/ogg">
     </audio>
 
@@ -364,7 +364,7 @@
             <span id="liveTime"><i class="fa-regular fa-clock" style="color: #00f0ff;"></i> --:-- --</span>
             <span id="liveDate"><i class="fa-regular fa-calendar-days" style="color: #ff007f;"></i> --/--/----</span>
         </div>
-        <button class="audio-btn active" id="audioToggleBtn" onclick="toggleAudio()">
+        <button class="audio-btn" id="audioToggleBtn" onclick="toggleAudio()">
             <i class="fa-solid fa-volume-high"></i> Music On
         </button>
     </div>
@@ -428,37 +428,49 @@
         updateClock();
 
         const audio = document.getElementById('bgAudio');
+        audio.volume = 1.0; // Full Volume Set Kela Ahe
         const audioBtn = document.getElementById('audioToggleBtn');
-        let isPlaying = false;
+        let isPlaying = true;
 
         function toggleAudio() {
             if (isPlaying) {
                 audio.pause();
                 audioBtn.innerHTML = `<i class="fa-solid fa-music"></i> Music Off`;
-                audioBtn.classList.remove('active');
+                audioBtn.style.background = "rgba(0, 240, 255, 0.15)";
+                audioBtn.style.color = "#00f0ff";
+                audioBtn.style.boxShadow = "none";
                 isPlaying = false;
             } else {
                 audio.play().then(() => {
                     audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
-                    audioBtn.classList.add('active');
+                    audioBtn.style.background = "#00f0ff";
+                    audioBtn.style.color = "#000";
+                    audioBtn.style.boxShadow = "0 0 10px #00f0ff";
                     isPlaying = true;
                 }).catch(err => console.log(err));
             }
         }
 
-        // Auto play on first click/touch anywhere on screen (browser security bypass)
-        function triggerAudioPlay() {
-            if (!isPlaying) {
-                audio.play().then(() => {
-                    audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
-                    audioBtn.classList.add('active');
-                    isPlaying = true;
-                }).catch(e => console.log(e));
-            }
-        }
-
-        window.addEventListener('click', triggerAudioPlay, { once: true });
-        window.addEventListener('touchstart', triggerAudioPlay, { once: true });
+        // Screen var kuthepan touch kelyavar audio 100% play hoil
+        window.addEventListener('DOMContentLoaded', () => {
+            audio.play().then(() => {
+                isPlaying = true;
+            }).catch(() => {
+                const startAudio = () => {
+                    audio.play().then(() => {
+                        audioBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Music On`;
+                        audioBtn.style.background = "#00f0ff";
+                        audioBtn.style.color = "#000";
+                        audioBtn.style.boxShadow = "0 0 10px #00f0ff";
+                        isPlaying = true;
+                        window.removeEventListener('click', startAudio);
+                        window.removeEventListener('touchstart', startAudio);
+                    });
+                };
+                window.addEventListener('click', startAudio);
+                window.addEventListener('touchstart', startAudio);
+            });
+        });
 
         let currentPlatform = 'instagram';
 
@@ -502,7 +514,7 @@
                     apiUrl = `https://api.sayan-nexuswork.workers.dev/play?query=${encodeURIComponent(queryVal)}`;
                 }
 
-                const response =alerta = await fetch(apiUrl);
+                const response = await fetch(apiUrl);
                 const data = await response.json();
                 
                 document.getElementById('loader').style.display = 'none';
